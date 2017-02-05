@@ -82,7 +82,7 @@ public class LinkedList {
         previousNode.next = currentNode.next;
     }
     /*
-    Time Complexity :  O(n)
+    Time Complexity :  O(n), Iterative Length for LinkedList
     */
     public int listLength() {
         ListNode currentNode = head;
@@ -112,18 +112,92 @@ public class LinkedList {
         return 1 + listLengthRecurrsive(node.next);
     }
 
+    public void swapNodes(int data1, int data2) {
+        // Don't swap if both data 1 and data2 are same
+        if (data1 == data2) return;
+
+        ListNode previousNodeX = null, currentNodeX = head;
+        while(currentNodeX != null && currentNodeX.data  != data1) {
+            previousNodeX = currentNodeX;
+            currentNodeX = currentNodeX.next;
+        }
+
+        ListNode previousNodeY = null,currentNodeY = head;
+        while(currentNodeY !=null && currentNodeY.data != data2) {
+            previousNodeY = currentNodeY;
+            currentNodeY = currentNodeY.next;
+        }
+
+        // If any of the two data element is not present in the LinkedList
+        if (currentNodeX == null || currentNodeY == null) return;
+
+        if(previousNodeX != null) {
+            previousNodeX.next = currentNodeY;
+        }else {
+            head = currentNodeY;
+        }
+
+        if(previousNodeY != null) {
+            previousNodeY.next =currentNodeX;
+        }else {
+            head = currentNodeX;
+        }
+
+        ListNode temp = currentNodeX.next;
+        currentNodeX.next = currentNodeY.next;
+        currentNodeY.next = temp;
+    }
+
+    /*
+    Reverse a LinkedList
+    Time Complexity : O(n)
+    Logic : at each node keep swaping the nodes
+    */
+
+    public void reverseList() {
+        ListNode previousNode = null, nextNode = null, currentNode = head;
+        if (currentNode == null || currentNode.next == null) return;
+        while(currentNode != null) {
+            nextNode = currentNode.next;
+            currentNode.next = previousNode;
+            previousNode = currentNode;
+            currentNode = nextNode;
+        }
+        head = previousNode;
+    }
+
+    public ListNode mergeSortedList(ListNode head1, ListNode head2) {
+        if (head1 == null) {
+            return head2;
+        }
+
+        if(head2 == null) {
+            return head1;
+        }
+
+        Node currentNode = null;
+        if(head1.data < head2.data) {
+            current = head1;
+            current.next = mergeSortedList(head1.next,head2);
+        }else {
+            current = head2;
+            current.next = mergeSortedList(head1, head2.next);
+        }
+        return current;
+    }
+
     public static void main(String[] args) {
 
         LinkedList llist = new LinkedList();
-        llist.head = new ListNode(1);
-        ListNode secondElement = new ListNode(2);
-        ListNode thirdElement = new ListNode(3);
-        llist.head.next = secondElement;
-        secondElement.next = thirdElement;
 
         llist.push(5);
         llist.push(10);
         llist.push(15);
+        llist.push(20);
+        llist.printList();
+        System.out.println(" ");
+        llist.reverseList();
+        llist.printList();
     }
 
 
