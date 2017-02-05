@@ -66,6 +66,52 @@ public class LinkedList {
         previousNode.next = endNode;
     }
 
+    public void deleteNode(int key) {
+        ListNode currentNode = head, previousNode = null;
+        if (currentNode == null) System.out.println ("The list is empty");
+        if (currentNode != null && currentNode.data == key) {
+            head = currentNode.next;
+            return;
+        }
+
+        while (currentNode != null && currentNode.data != key) {
+            previousNode = currentNode;
+            currentNode = currentNode.next;
+        }
+        if (currentNode == null) return;
+        previousNode.next = currentNode.next;
+    }
+    /*
+    Time Complexity :  O(n)
+    */
+    public int listLength() {
+        ListNode currentNode = head;
+        if (currentNode == null) return 0;
+        if (currentNode.next == null) return 1;
+
+        int counter =0;
+        while(currentNode != null) {
+            counter++;
+            currentNode =currentNode.next;
+        }
+        return counter;
+    }
+
+    /*
+    List Length recurresively
+    Time Complexity : O(n) and space Complexity O(n)
+    */
+
+    public int listLengthRec() {
+        ListNode currentNode = head;
+        return listLengthRecurrsive(currentNode);
+    }
+
+    public int listLengthRecurrsive(ListNode node) {
+        if (node == null) return 0;
+        return 1 + listLengthRecurrsive(node.next);
+    }
+
     public static void main(String[] args) {
 
         LinkedList llist = new LinkedList();
@@ -76,10 +122,8 @@ public class LinkedList {
         secondElement.next = thirdElement;
 
         llist.push(5);
-        llist.insertAtlast(10);
-        llist.insertAtPosition(2,7);
-
-        llist.printList();
+        llist.push(10);
+        llist.push(15);
     }
 
 
