@@ -36,3 +36,10 @@ Dynamic Programming:
     Optimal Substructure: A larger optimal solution compromised of two smaller
     optimal solutions such as shortest distance from A->C is the shortest distance
     from A->B and B->C.
+
+Binary Search Tree:
+    Left subtree should contain value less than right subtree and their should
+    be no duplicate values.
+    Such ordering provides a fast way to access minimum and maximum
+
+    **class Heap<T extends Comparable<T>>, extends used to refer interface here **
