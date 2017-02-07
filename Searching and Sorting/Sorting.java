@@ -50,15 +50,50 @@ public class Sorting {
         }
     }
 
+    public void quickSort(int[] input, int low, int high) {
+        if(low < high) {
+            /*
+            Partition the array assuming last element as pivot element
+            */
+            int partitionIndex = partition(input, low ,high);
+            quickSort(input, low, partitionIndex-1);
+            quickSort(input, partitionIndex+1, high);
+        }
+    }
+
+    private int partition(int[] input, int low , int high) {
+        int pi = input[high];
+        int belowPiPointer = low -1;
+        for (int i =low; i <= high-1; i++) {
+            if(input[i] <= pi) {
+                belowPiPointer++;
+                int temp = input[i];
+                input[i] = input[belowPiPointer];
+                input[belowPiPointer] = temp;
+            }
+        }
+        int temp = input[belowPiPointer + 1];
+        input[belowPiPointer + 1] = input[high];
+        input[high] = temp;
+        return belowPiPointer+1;
+    }
+
+    public void quickSort(int[] input) {
+        int low =0;
+        int high = input.length-1;
+        quickSort(input, low, high);
+    }
+
+    public void printIntArray(int[] input) {
+        int size = input.length;
+        for(int i = 0; i< size; i++) {
+            System.out.print(input[i] + " ");
+        }
+    }
     public static void main(String[] args){
         Sorting objSort = new Sorting();
-        ArrayList<Integer> input = new ArrayList<Integer>();
-        input.add(20);
-        input.add(10);
-        input.add(50);
-        input.add(35);
-        objSort.mergeSort(input);
-        Searching objSearch = new Searching();
-        objSearch.printArraylist(input);
+        int[] input =  {20, 10, 15, 3, 18, 4, 25};
+        objSort.quickSort(input);
+        objSort.printIntArray(input);
     }
 }
