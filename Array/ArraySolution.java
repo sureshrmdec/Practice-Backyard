@@ -79,9 +79,39 @@ public class ArraySolution {
         }
         return -1;
     }
+
+    /*
+    Time complexity : O(n) but sum can be overflow so can substract from fixed
+    number and perform the operation on that list
+    */
+    public int missingElement1(int[] input) {
+        int size = input.length;
+        int currentArraySum =0;
+        for (int i = 0; i < size; i++) {
+            currentArraySum = currentArraySum + input[i];
+        }
+        int neededSum = ((size+1)*(size+2))/2;
+        return neededSum - currentArraySum;
+    }
+
+    public int missingElement2(int[] input) {
+        int size = input.length;
+        int x1 =input[0];
+        int x2 = 1;
+        for (int i =0; i < size; i++) {
+            x1 = x1^input[i];
+        }
+
+        for (int i =0; i < size +1; i++) {
+            x2 = x2^i;
+        }
+        return (x1^x2);
+    }
+
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
-        int[] input = {10,20,20,20,10};
-        System.out.println(objArraySol.oddNumberOccurence2(input));
+        int[] input = {1,4,2,5};
+        System.out.println(objArraySol.missingElement1(input));
+
     }
 }

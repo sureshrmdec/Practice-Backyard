@@ -175,15 +175,42 @@ public class LinkedList {
             return head1;
         }
 
-        Node currentNode = null;
+        ListNode currentNode = null;
         if(head1.data < head2.data) {
-            current = head1;
-            current.next = mergeSortedList(head1.next,head2);
-        }else {
-            current = head2;
-            current.next = mergeSortedList(head1, head2.next);
+            currentNode = head1;
+            currentNode.next = mergeSortedList(head1.next,head2);
+        } else {
+            currentNode = head2;
+            currentNode.next = mergeSortedList(head1, head2.next);
         }
-        return current;
+        return currentNode;
+    }
+    public void mergeSort(ListNode node) {
+
+        if (node == null || node.next == null) return;
+
+        ListNode mid = getMidNode(head);
+        ListNode firstList = head;
+        ListNode secondList = mid.next;
+        mid.next = null;
+        mergeSort(firstList);
+        mergeSort(secondList);
+        head = mergeSortedList(firstList,secondList);
+    }
+
+    public void mergeSort() {
+        mergeSort(head);
+    }
+
+    ListNode getMidNode(ListNode head) {
+        ListNode slow =head;
+        ListNode fast = head;
+
+        while(fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
     }
 
     public static void main(String[] args) {
@@ -191,12 +218,10 @@ public class LinkedList {
         LinkedList llist = new LinkedList();
 
         llist.push(5);
-        llist.push(10);
+        llist.push(2);
         llist.push(15);
-        llist.push(20);
-        llist.printList();
-        System.out.println(" ");
-        llist.reverseList();
+        llist.push(3);
+        llist.mergeSort();
         llist.printList();
     }
 

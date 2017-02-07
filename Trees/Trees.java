@@ -52,13 +52,25 @@ public class Trees {
         postOrderR(root);
     }
 
+    public treeNode searchKey(treeNode node, int key) {
+        if(root == null  || root.data = key) {
+            return root;
+        }
+        if(root.data > key) {
+            searchKey(root.left, key);
+        }
+        if(root.data < key) {
+            searchKey(root.right,key);
+        }
+    }
+
     public static void main(String[] args) {
         Trees tree = new Trees();
-        tree.root = new treeNode(1);
+        tree.root = new treeNode(5);
         tree.root.left = new treeNode(2);
-        tree.root.right = new treeNode(3);
-        tree.root.left.left = new treeNode(4);
-        tree.root.left.right = new treeNode(5);
+        tree.root.right = new treeNode();
+        tree.root.left.left = new treeNode(1);
+        tree.root.left.right = new treeNode(3);
         tree.root.right.left = new treeNode(6);
         tree.root.right.right = new treeNode(7);
         tree.inOrder();

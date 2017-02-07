@@ -1,5 +1,17 @@
 import java.util.ArrayList;
 
+    /*
+    Lowwer bound on comparison based Sorting : nlogn
+    Consider problem as decision tree and each root to leaf path as one permutation
+    of input array. n! <= 2^x ( numbers of leaf of decision tree height x)
+    x- number of comparison needed to sort the array will lower bound to Log n
+
+    Memory writes : Selection sortes have minimum memory writes but if you use
+    cycle sort it will further less, Cycle short value will be written one time
+    or zero based on the fact that item is already in correct position or written
+    one time to it's correct position
+    */
+
 public class Sorting {
 
     public void mergeSort(ArrayList<Integer> input) {
@@ -49,7 +61,13 @@ public class Sorting {
             }
         }
     }
+    /*
+    time Complexity : O(Log n) ,Worst case depend on how pivot element is selected
+    if pivot element is selected as leftmost or rightmost ,worst case occur when
+    the array is completely sorted in one way or other.
 
+    USe random element as pivot or median of first ,middile and last element
+    */
     public void quickSort(int[] input, int low, int high) {
         if(low < high) {
             /*
