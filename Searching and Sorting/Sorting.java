@@ -1,5 +1,6 @@
 import java.util.ArrayList;
-
+import java.util.Arrays;
+import java.util.Comparator;
     /*
     Lowwer bound on comparison based Sorting : nlogn
     Consider problem as decision tree and each root to leaf path as one permutation
@@ -108,10 +109,70 @@ public class Sorting {
             System.out.print(input[i] + " ");
         }
     }
+
+    /**
+    *Problem : Sort the array from the pivot -closet come first then farthest
+    *Approach : Use java comparator to define comparison to sort the Integers
+    @param Input Integer array and pivot element to compare
+    @return void -print the  array in sorted order
+    */
+    public void sortArrayFromPivot(Integer[] input, Integer pivot) {
+        PivotComparater objComparater = new PivotComparater(pivot);
+        Arrays.sort(input, objComparater);
+        for(Integer i : input) {
+            System.out.println(i);
+        }
+
+    }
+    /**
+    * Problem : Sort the given array using count sort
+    * Approach :Create a temp array containing frequency of each input then define
+    * array where each element shows number of values below that index and last
+    * print the value from input array to output array using above temp array
+    */
+    public void counterSort(int[] input) {
+        int size = input.length;
+        int[] countArray = new int[256];
+        for (int i = 0; i < size; i++) {
+            countArray[input[i]]++;
+        }
+        int countArraySize = countArray.length;
+        for (int i = 1; i < countArraySize; i++) {
+            countArray[i] = countArray[i] + countArray[i-1];
+        }
+        int[] output = new int[size];
+        for(int i = 0; i < size; i++) {
+            int indexCount = countArray[input[i]];
+            if(indexCount >= 0) {
+                output[indexCount-1] = input[i];
+                countArray[input[i]]--;
+            }
+        }
+        for (int i = 0; i < size; i++) {
+            input[i] = output[i];
+        }
+    }
+
     public static void main(String[] args){
         Sorting objSort = new Sorting();
         int[] input =  {20, 10, 15, 3, 18, 4, 25};
-        objSort.quickSort(input);
+        objSort.counterSort(input);
         objSort.printIntArray(input);
+
+
     }
 }
+
+    class PivotComparater implements Comparator<Integer> {
+        private int pivot;
+
+        public PivotComparater(int d) {
+            super();
+            this.pivot = d;
+        }
+
+        @Override
+        public int compare(Integer a, Integer b) {
+            return (Math.abs(a - pivot) - Math.abs(b - pivot));
+        }
+    }
