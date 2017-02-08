@@ -30,6 +30,33 @@ public class LinkedList {
             head = newHead;
     }
 
+    /**
+    * Pop the top element from the stack
+    @return top element of stack if present,-1 otherwise
+    */
+    public int pop() {
+        if (head == null) return -1;
+        int data = head.data;
+        head = head.next;
+        return data;
+    }
+
+    /**
+    *Peek the top element from the stack
+    @return top element of stack if present ,-1 otherwise
+    */
+    public int peek() {
+        return head.data;
+    }
+
+    /**
+    *makeEmpty will clear all stack entries
+    */
+    public void makeEmpty() {
+        head = null;
+    }
+
+
     /*
     Inserting an element at given position
     Time Complexity : O(n) in worst case
