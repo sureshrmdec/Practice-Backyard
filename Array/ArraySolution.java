@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.Set;
 
 public class ArraySolution {
@@ -108,10 +109,31 @@ public class ArraySolution {
         return (x1^x2);
     }
 
+    public int searchRotatedArray(int[] input, int match) {
+        int pivotIndex = -1;
+        int size = input.length;
+        for(int i =0; i < size-1; i++) {
+            if(input[i+1] < input[i]) {
+                pivotIndex = i;
+            }
+        }
+        int result = -1;
+        int[] firstArray = Arrays.copyOfRange(input,0,pivotIndex+1);
+        int[] secondArray = Arrays.copyOfRange(input,pivotIndex+1,size);
+
+        if(match >= firstArray[0] && match <= firstArray[firstArray.length-1]) {
+            result =  Arrays.binarySearch(firstArray, match);
+        }
+        result =  Arrays.binarySearch(secondArray, match);
+        return (result + pivotIndex + 1);
+    }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
-        int[] input = {1,4,2,5};
-        System.out.println(objArraySol.missingElement1(input));
+        int[] input = {5, 6, 7, 8, 9, 10, 1, 2, 3};
+        int[] input2 = {30, 40, 50, 10, 20};
+        System.out.println(objArraySol.searchRotatedArray(input2, 10));
+
+
 
     }
 }
