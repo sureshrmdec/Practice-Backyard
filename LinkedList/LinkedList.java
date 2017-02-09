@@ -13,8 +13,8 @@ public class LinkedList {
         }
     }
 
-    public void printList() {
-        ListNode temp = head;
+    public void printList(ListNode node) {
+        ListNode temp = node;
         while (temp != null) {
             System.out.print(temp.data + " ");
             temp = temp.next;
@@ -181,16 +181,16 @@ public class LinkedList {
     Logic : at each node keep swaping the nodes
     */
 
-    public void reverseList() {
-        ListNode previousNode = null, nextNode = null, currentNode = head;
-        if (currentNode == null || currentNode.next == null) return;
+    public ListNode reverseList(ListNode node) {
+        ListNode previousNode = null, nextNode = null, currentNode = node;
+        if (currentNode == null || currentNode.next == null) return node;
         while(currentNode != null) {
             nextNode = currentNode.next;
             currentNode.next = previousNode;
             previousNode = currentNode;
             currentNode = nextNode;
         }
-        head = previousNode;
+        return previousNode;
     }
 
     public ListNode mergeSortedList(ListNode head1, ListNode head2) {
@@ -240,16 +240,50 @@ public class LinkedList {
         return slow;
     }
 
+    /**
+    *Problem :Reverse a Linked List in groups of given size
+    *Approach :
+    *   Divide the list into two part with pivot as give size key
+    *   Reverese each list
+    *   Join first list with secondList
+    *Time Complexity : O(n)
+    *Space Complexity : O(n)
+    */
+    public void ReverseGroup(ListNode node, int k) {
+        if(node == null || node.next == null) return;
+        ListNode firstList = node;
+        ListNode currentNode = node;
+        ListNode secondList;
+        int counter =0;
+        while(counter < k && currentNode.next != null) {
+            currentNode = currentNode.next;
+            counter++;
+        }
+        secondList = currentNode.next;
+        currentNode.next = null;
+        firstList = reverseList(firstList);
+        secondList = reverseList(secondList);
+        currentNode = firstList;
+        while (currentNode.next !=null) {
+            currentNode = currentNode.next;
+        }
+        currentNode.next = secondList;
+        printList(firstList);
+    }
+
+
     public static void main(String[] args) {
 
         LinkedList llist = new LinkedList();
-
-        llist.push(5);
-        llist.push(2);
-        llist.push(15);
-        llist.push(3);
-        llist.mergeSort();
-        llist.printList();
+            llist.push(8);
+            llist.push(7);
+            llist.push(6);
+            llist.push(5);
+            llist.push(4);
+            llist.push(3);
+            llist.push(2);
+            llist.push(1);
+            llist.ReverseGroup(llist.head, 2);
     }
 
 
