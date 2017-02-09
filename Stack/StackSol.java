@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
+import java.lang.StringBuilder;
 
 public class StackSol {
 
@@ -59,7 +60,7 @@ public class StackSol {
         }
     }
 
-    public void intNextGreaterElementStack(ArrayList<Integer> input) {
+    public void intNextGreaterElementStack(int[] input) {
         int size = input.length;
         int next;
         int element;
@@ -89,10 +90,63 @@ public class StackSol {
             System.out.println(valueMap.get(i));
         }
     }
+
+    /**
+    *Problem : Reverese a stack using revereseStackRecurrsion
+    *Approach : key observation is at each step of recurrsion pop out value and
+    * combine them while calling back the recurrsion
+    * Time Complexity : O(n) -> calling recurrsion stack for all values of stack
+    * Space Complexity : 0(n) -> stack Space
+    */
+
+     public String revereseStackRecurrsion(Stack input) {
+
+    }
+
+    /**
+    *Problem : Sort a stack using recurrsion, No looping construct are allowed
+    *Obeservation : Thing in terms of recurrsion how recurssion stack will hold
+    *values and how it will recompute
+    *Pseudo Code :
+    * sortStack(stack S)
+        if stack is not empty
+        temp = s.pop();
+        sortStack(s)
+        sortedInsert(s, temp);
+    * sortedInsert(Stack s, element)
+        if stack is empty or element is smaller than top
+            s.push()
+        int temp = s.pop();
+        sortedInsert(stack s, element);
+        push (s, temp)
+    * Time Complexity : O(n) , space Complexity : O(n)
+    */
+    public void sortStackRecurrsion(Stack<Integer> s) {
+            if (s.isEmpty()) return;
+            Integer temp = s.pop();
+            sortStackRecurrsion(s);
+            sortedInsert(s, temp);
+            System.out.println(s.toString());
+    }
+
+    public void sortedInsert(Stack<Integer> s, Integer element) {
+        if(s.isEmpty() || s.peek() < element) {
+            s.push(element);
+            return;
+        }
+        Integer temp = s.pop();
+        sortedInsert(s, element);
+        s.push(temp);
+    }
+
+
     public static void main(String[] args) {
         StackSol objStackSol = new StackSol();
-        int[] in = {4, 5, 2, 25};
-        ArrayList<Integer> input = new ArrayList<Integer>(Arrays.asList(in)) ;
-        objStackSol.intNextGreaterElementStack(input);
+        Stack<Integer> stack = new Stack<Integer>();
+        stack.push(2);
+        stack.push(11);
+        stack.push(1);
+        stack.push(7);
+        objStackSol.sortStackRecurrsion(stack);
     }
 }
