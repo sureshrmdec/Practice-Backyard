@@ -1,3 +1,6 @@
+import java.util.Queue;
+import java.util.LinkedList;
+
 public class Trees {
     treeNode root;
 
@@ -40,6 +43,16 @@ public class Trees {
         System.out.print(node.data + " ");
     }
 
+    private void printLevelOrderTraversal(treeNode node) {
+        Queue<treeNode> queue = new LinkedList<treeNode>();
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            treeNode tempNode = queue.poll();
+            System.out.print(tempNode.data + " ");
+            if(tempNode.left != null) queue.offer(tempNode.left);
+            if(tempNode.right != null) queue.offer(tempNode.right);
+        }
+    }
     public void inOrder() {
         inOrderR(root);
     }
@@ -52,32 +65,32 @@ public class Trees {
         postOrderR(root);
     }
 
+    public void printLevelOrderTraversal() {
+        printLevelOrderTraversal(root);
+    }
+
     public treeNode searchKey(treeNode node, int key) {
-        if(root == null  || root.data = key) {
+        if(node == null  || node.data == key) {
             return root;
         }
-        if(root.data > key) {
+        if(node.data > key) {
             searchKey(root.left, key);
         }
-        if(root.data < key) {
-            searchKey(root.right,key);
+        if(node.data < key ) {
+            return searchKey(node.right,key);
         }
+        return null;
     }
 
     public static void main(String[] args) {
         Trees tree = new Trees();
         tree.root = new treeNode(5);
         tree.root.left = new treeNode(2);
-        tree.root.right = new treeNode();
+        tree.root.right = new treeNode(8);
         tree.root.left.left = new treeNode(1);
         tree.root.left.right = new treeNode(3);
         tree.root.right.left = new treeNode(6);
         tree.root.right.right = new treeNode(7);
-        tree.inOrder();
-        System.out.println(" ");
-        tree.preOrder();
-        System.out.println(" ");
-        tree.postOrder();
     }
 
 
