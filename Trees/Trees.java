@@ -45,7 +45,7 @@ public class Trees {
 
     private void printLevelOrderTraversal(treeNode node) {
         Queue<treeNode> queue = new LinkedList<treeNode>();
-        queue.offer(root);
+        queue.offer(node);
         while(!queue.isEmpty()) {
             treeNode tempNode = queue.poll();
             System.out.print(tempNode.data + " ");
@@ -91,6 +91,7 @@ public class Trees {
         tree.root.left.right = new treeNode(3);
         tree.root.right.left = new treeNode(6);
         tree.root.right.right = new treeNode(7);
+        tree.printLevelOrderTraversal();
     }
 
 
