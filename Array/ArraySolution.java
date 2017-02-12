@@ -127,13 +127,37 @@ public class ArraySolution {
         result =  Arrays.binarySearch(secondArray, match);
         return (result + pivotIndex + 1);
     }
+
+    /*
+    *Problem : Reverse an array String
+    *observation : Use two pointers to keep track of head and tail index
+    *Pseudo Code:
+    *   if string length is < 2 return string
+    *   Run a loop through half size of array and swap the head and tail element
+    *Time Complexity : O(n/2)
+    */
+    public void reverseArray(int[] input, int start, int end) {
+        int temp;
+
+        if(start >= end)  return;
+            temp = input[start];
+            input[start] = input[end];
+            input[end] = temp;
+            reverseArray(input, start+1, end-1);
+
+    }
+
+    public static void printArray(int[] input) {
+        int size = input.length;
+        for(int i = 0; i < size; i++) {
+            System.out.print(input[i] + " ");
+        }
+    }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int[] input = {5, 6, 7, 8, 9, 10, 1, 2, 3};
-        int[] input2 = {30, 40, 50, 10, 20};
-        System.out.println(objArraySol.searchRotatedArray(input2, 10));
-
-
+        objArraySol.reverseArray(input, 0, input.length-1);
+        printArray(input);
 
     }
 }
