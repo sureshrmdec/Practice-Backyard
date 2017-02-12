@@ -1,5 +1,5 @@
-import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class Trees {
     treeNode root;
@@ -82,6 +82,26 @@ public class Trees {
         return null;
     }
 
+    public void diameter() {
+        System.out.println(diameter(root));
+    }
+    public int diameter(treeNode root) {
+        if (root == null) return 0;
+
+        //get height of left and right subtree
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+        return max(leftHeight + rightHeight + 1, max(diameter(root.left), diameter(root.right)));
+    }
+
+    public int max(int a, int b) {
+        return a>= b ? a : b;
+    }
+    public int height(treeNode root) {
+        if (root == null) return 0;
+        return Math.max(height(root.left), height(root.right));
+    }
+
     public static void main(String[] args) {
         Trees tree = new Trees();
         tree.root = new treeNode(5);
@@ -91,7 +111,7 @@ public class Trees {
         tree.root.left.right = new treeNode(3);
         tree.root.right.left = new treeNode(6);
         tree.root.right.right = new treeNode(7);
-        tree.printLevelOrderTraversal();
+        tree.diameter();
     }
 
 
