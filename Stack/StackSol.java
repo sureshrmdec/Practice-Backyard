@@ -139,14 +139,70 @@ public class StackSol {
         s.push(temp);
     }
 
+    public String infixToPrefix(String input) {
+        char[] charArray = input.toCharArray();
+        Stack<Character> stack = new Stack<Character>();
+        int inputSize = charArray.length;
+        StringBuilder sb = new StringBuilder();
+
+        for(int i = 0; i < inputSize; i++) {
+            if(charArray[i] == ' ' || charArray[i] == ',' ) continue;
+            if(isOperator(charArray[i])) {
+                while(!stack.isEmpty() && stack.peek() != '(' && HasHigherPrecedence(stack.peek(), charArray[i])) {
+                    sb.append(stack.pop());
+                }
+                s.push(charArray[i]);
+                sb.append(char);
+            } else if (isOperand(charArray[i])) {
+                sb.append(charArray[i]);
+            } else if (charArray[i] == ')') {
+                while (!stack.isEmpty() && stack.peek() != '(') {
+                    sb.append(s.pop());
+                }
+            }
+        }
+
+        while(!stack.isEmpty()) {
+            sb.append(s.pop());
+        }
+
+        return sb.toString();
+    }
+
+    boolean isOperator(char C) {
+        if(C == '+'|| C == '-' || C == '/' || C == '*' || C == '^' ||  C == '$') return true;
+        return false;
+    }
+
+    boolean isOperand(char C) {
+        if(C >= '0' && C <= '9') return true;
+        if(C >= 'a' && C <= 'z') return true;
+        if(C >= 'A' && C <= 'Z') return true;
+        return false;
+    }
+    int GetOperatorWeight(char op)  {
+
+        if(op == '+' || op == '-') return 1;
+        if(op =='*' || op == '/') return 2;
+        if(op == '$') return 3;
+        return -1;
+    }
+
+    if isRightAssociative(char op) {
+        if(op == '$') return true;
+        return false;
+    }
+    boolean HasHigherPrecedence(char op1, char op2) {
+        int op1Weight = GetOperatorWeight(op1);
+        int op2Weight = GetOperatorWeight(op2);
+        if (op1Weight == op2Weight) {
+            if(isRightAssociative(op1)) return false;
+            else return true;
+        }
+        return op1Weight > op2Weight ? true : false;
+    }
 
     public static void main(String[] args) {
         StackSol objStackSol = new StackSol();
-        Stack<Integer> stack = new Stack<Integer>();
-        stack.push(2);
-        stack.push(11);
-        stack.push(1);
-        stack.push(7);
-        objStackSol.sortStackRecurrsion(stack);
     }
 }
