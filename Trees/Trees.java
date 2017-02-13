@@ -99,7 +99,14 @@ public class Trees {
     }
     public int height(treeNode root) {
         if (root == null) return 0;
-        return Math.max(height(root.left), height(root.right));
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+        return (1 + max(leftHeight, rightHeight));
+    }
+
+    public int size(treeNode root) {
+        if(root == null) return 0;
+        return size(root.left) + size(root.right) + 1;
     }
 
     public static void main(String[] args) {
@@ -111,7 +118,7 @@ public class Trees {
         tree.root.left.right = new treeNode(3);
         tree.root.right.left = new treeNode(6);
         tree.root.right.right = new treeNode(7);
-        tree.diameter();
+        System.out.println(tree.height(tree.root));
     }
 
 

@@ -153,6 +153,22 @@ public class ArraySolution {
             System.out.print(input[i] + " ");
         }
     }
+
+    /*
+    *Problem : Rotate an array from a given position
+    *Pseudo Code:
+    *   Loop until you reach array rotation point and store in temp array
+    *   Shift the original array to right and append the temp array to end
+    *Time Complexity : O(n) - worst case you have rotation at end,
+    *Space Complexity : O(n)
+    */
+    public int[] rotateArray(int[] input, int d) {
+        int[] temp = new int[d];
+        for(int  = 0; i < d; i++) {
+            temp[i] = input[i];
+        }
+        
+    }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int[] input = {5, 6, 7, 8, 9, 10, 1, 2, 3};
