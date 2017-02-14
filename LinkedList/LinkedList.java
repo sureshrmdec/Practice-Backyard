@@ -271,6 +271,23 @@ public class LinkedList {
         printList(firstList);
     }
 
+    public void removeElement(ListNode node, int[] input) {
+        int position;
+        int counter = 0;
+
+        ListNode currentNode = node;
+        for (int i =0; i < input.length; i++) {
+            
+            position = input[i] -i -counter;
+            while (counter < position) {
+                counter++;
+                previousNode = currentNode;
+                currentNode = currentNode.next;
+            }
+            previousNode.next = currentNode.next;
+        }
+        printList(head);
+    }
 
     public static void main(String[] args) {
 
@@ -283,7 +300,8 @@ public class LinkedList {
             llist.push(3);
             llist.push(2);
             llist.push(1);
-            llist.ReverseGroup(llist.head, 2);
+            int[] input = {1, 3, 4};
+            llist.removeElement(llist.head, input);
     }
 
 
