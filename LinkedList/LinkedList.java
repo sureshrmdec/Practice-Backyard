@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Stack;
+
 public class LinkedList {
     ListNode head; //head of the LinkedList
 
@@ -271,37 +274,48 @@ public class LinkedList {
         printList(firstList);
     }
 
-    public void removeElement(ListNode node, int[] input) {
-        int position;
-        int counter = 0;
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        Stack<Integer> s1 = new Stack<Integer>();
+        Stack<Integer> s2 = new Stack<Integer>();
+        ListNode currentNodeL1 = l1;
+        ListNode currentNodeL2 = l2;
 
-        ListNode currentNode = node;
-        for (int i =0; i < input.length; i++) {
-            
-            position = input[i] -i -counter;
-            while (counter < position) {
-                counter++;
-                previousNode = currentNode;
-                currentNode = currentNode.next;
-            }
-            previousNode.next = currentNode.next;
+        while(currentNodeL1 != null) {
+            s1.push(currentNodeL1.data);
+            currentNodeL1 = currentNodeL1.next;
         }
-        printList(head);
+
+        while(currentNodeL2 != null) {
+            s2.push(currentNodeL2.data);
+            currentNodeL2 = currentNodeL2.next;
+        }
+
+        int sum = 0;
+        ListNode list = new ListNode(0);
+        while (!s1.empty() || !s2.empty()) {
+
+            if(!s1.empty()) sum += s1.pop();
+            if(!s2.empty()) sum += s2.pop();
+            list.data = sum % 10;
+            ListNode head = new ListNode(sum/10);
+            head.next = list;
+            list = head;
+            sum = sum/10;
+        }
+
+        return list.data  == 0 ? list.next  : list;
     }
 
     public static void main(String[] args) {
 
         LinkedList llist = new LinkedList();
-            llist.push(8);
-            llist.push(7);
-            llist.push(6);
-            llist.push(5);
-            llist.push(4);
-            llist.push(3);
-            llist.push(2);
-            llist.push(1);
-            int[] input = {1, 3, 4};
-            llist.removeElement(llist.head, input);
+            llist.head = new ListNode(50);
+            llist.head.next = new ListNode(20);
+            llist.head.next.next = new ListNode(15);
+            llist.head.next.next.next = new ListNode(4);
+            llist.head.next.next.next.next = new ListNode(10);
+            llist.head.next.next.next.next.next = llist.head.next.next;
+
     }
 
 
