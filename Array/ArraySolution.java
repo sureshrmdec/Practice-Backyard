@@ -155,25 +155,31 @@ public class ArraySolution {
     }
 
     /*
-    *Problem : Rotate an array from a given position
-    *Pseudo Code:
-    *   Loop until you reach array rotation point and store in temp array
-    *   Shift the original array to right and append the temp array to end
-    *Time Complexity : O(n) - worst case you have rotation at end,
-    *Space Complexity : O(n)
+    *Problem :http://www.geeksforgeeks.org/maximum-difference-between-two-elements/
+    *Observation : Look for ranges such as it grow and found new small value then
+    *found new maxDifference in that range.
+    *Time Compleoxity : O(n); Space Complexity : O(1)
     */
-    public int[] rotateArray(int[] input, int d) {
-        int[] temp = new int[d];
-        for(int  = 0; i < d; i++) {
-            temp[i] = input[i];
+    public int maxDifference(int[] input) {
+        int minValue = input[0];
+        int maxDifference = input[1] - input[0];
+
+        for(int i = 1; i < input.length; i++) {
+            if((input[i] - minValue) > maxDifference) {
+                maxDifference = (input[i] - minValue);
+            }
+            if(input[i] < minValue) {
+                minValue = input[i];
+            }
         }
-        
+        return maxDifference;
     }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
-        int[] input = {5, 6, 7, 8, 9, 10, 1, 2, 3};
-        objArraySol.reverseArray(input, 0, input.length-1);
-        printArray(input);
+        int[] input = {3, 15, 10, 11, 2, 8, 4};
+        //objArraySol.reverseArray(input, 0, input.length-1);
+        System.out.println(objArraySol.maxDifference(input));
+
 
     }
 }
