@@ -305,17 +305,52 @@ public class LinkedList {
 
         return list.data  == 0 ? list.next  : list;
     }
+    /*
+    *Problem :http://www.geeksforgeeks.org/rotate-a-linked-list/
+    *Idea : Divide the list in two sets and rearrange the pointers
+    *Time Complexity : O(n); Space Complexity : O(1)
+    *@param : ListNode head, int target
+    *@return void,Change the List in place
+    */
+    public void rotateLinkedList(ListNode head, int target) {
+        if(target < 1) return;
+
+        ListNode currentNode = head;
+        ListNode secondList;
+        int counter = 1;
+
+        //Loop till rotate pivot element
+        while(currentNode != null  &&  counter < target) {
+            currentNode = currentNode.next;
+            counter++;
+        }
+        // Check and divide the list in two set
+        if(currentNode == null) return;
+        secondList = currentNode.next;
+        currentNode.next = null;
+        currentNode  = secondList;
+
+        //Find the last node and point to first list
+        ListNode previousNode = null;
+        while(currentNode != null) {
+            previousNode = currentNode;
+            currentNode = currentNode.next;
+        }
+        
+        previousNode.next = head;
+        printList(secondList);
+    }
 
     public static void main(String[] args) {
 
         LinkedList llist = new LinkedList();
-            llist.head = new ListNode(50);
-            llist.head.next = new ListNode(20);
-            llist.head.next.next = new ListNode(15);
-            llist.head.next.next.next = new ListNode(4);
-            llist.head.next.next.next.next = new ListNode(10);
-            llist.head.next.next.next.next.next = llist.head.next.next;
-
+        llist.head = new ListNode(10);
+        llist.head.next = new ListNode(20);
+        llist.head.next.next = new ListNode(30);
+        llist.head.next.next.next = new ListNode(40);
+        llist.head.next.next.next.next = new ListNode(50);
+        llist.head.next.next.next.next.next = new ListNode(60);
+        llist.rotateLinkedList(llist.head, 4);
     }
 
 
