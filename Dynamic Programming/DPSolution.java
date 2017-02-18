@@ -36,12 +36,45 @@ public class DPSolution {
       return val[n];
     }
 
+    /*
+    * Problem: Maximum sum increasing subsequence
+    *http://www.geeksforgeeks.org/dynamic-programming-set-14-maximum-sum-increasing-subsequence/
+    * DP Equation = T[i] = Math.max(T[i], T[j] + arr[i]) , i-< outerloop, j-<innerloop
+    * Time Complexity : O(n^2) ;Space Complexity :O(n)
+    */
+    public int maxSumSubarray(int[] input) {
+        int size = input.length;
+        int[] result = new int[size];
+
+        for(int i = 0; i < size; i++) {
+            result[i] = input[i];
+        }
+
+        for(int i = 0; i < size; i++) {
+            for(int j = 0; j < i; j++) {
+                if(input[j] < input[i]) {
+                    result[i] = Math.max(result[i], result[j] + input[i]);
+                }
+            }
+        }
+
+        int max = result[0];
+        for(int i = 1; i < size; i++) {
+            if(result[i] > max) {
+                max = result[i];
+            }
+        }
+        return max;
+    }
+
+
     public static void main(String[] args) {
         DPSolution objDP = new DPSolution();
-        int arr[] = new int[] {1, 5, 8, 9, 10, 17, 17, 20};
-        int size = arr.length;
-        System.out.println("Maximum Obtainable Value is " +
-                            objDP.cutRod(arr, size));
+        int arr[] = new int[]{1, 101, 2, 3, 100, 4, 5};
+        int n = arr.length;
+        System.out.println("Sum of maximum sum increasing "+
+               " subsequence is "+
+               objDP.maxSumSubarray( arr) );
 
     }
 }
