@@ -109,6 +109,17 @@ public class Trees {
         return size(root.left) + size(root.right) + 1;
     }
 
+    public boolean identicalTree(treeNode t1, treeNode t2) {
+
+        //if both are empty then return
+        if(t1 == null && t2 == null) return true;
+        if(t1 != null && t2 != null) {
+            return (t1.data == t2.data && identicalTree(t1.left, t2.left) && identicalTree(t2.right, t2.right));
+        }
+        //if one is empty and other is not
+        return false;
+    }
+
     public static void main(String[] args) {
         Trees tree = new Trees();
         tree.root = new treeNode(5);
