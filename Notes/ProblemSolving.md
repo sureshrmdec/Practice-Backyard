@@ -185,3 +185,46 @@ static class Node {
     }
 }
 }
+
+Problem : Bloomberg -Reverse an Integer
+Constraint :
+    1. How large the number is - will it fit in memory if I reverse it
+    2. base case if number is only one digit or Empty
+
+Idea :
+    1. divide the number and find each digit by remainder.
+    Time Complexity : O(K) - > number of places in 10th digit, O(n)
+
+Code:
+    public int reverseInteger(int x) {
+        boolean flag = false;
+        if(x < 0) {
+            x = 0 - x;
+            flag = true;
+        }
+
+        int result = 0;
+        while(x > 0) {
+            int digit = x % 10;
+            x = x / 10;
+            result = result * 10 + digit;
+        }
+
+        if(flag) {
+            result = 0 - result;
+        }
+
+        if(result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) return 0;
+        return result;
+    }
+
+Problem : find the contingious subarray in array with max sum
+https://leetcode.com/problems/maximum-subarray/
+
+Constraint :
+    1. Can list be Empty
+    2. What will the size of list
+    3. Can it hold negative numbers
+
+Idea:
+    1.
