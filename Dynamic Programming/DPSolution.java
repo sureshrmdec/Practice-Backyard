@@ -67,14 +67,45 @@ public class DPSolution {
         return max;
     }
 
+    /*
+    * Problem: Maximum increasing subsequence
+    *http://www.geeksforgeeks.org/dynamic-programming-set-3-longest-increasing-subsequence/
+    * DP Equation = T[i] = Math.max(T[i], T[j] + 1) , i-< outerloop, j-<innerloop
+    * Time Complexity : O(n^2) ;Space Complexity :O(n)
+    */
+    public int longestIncreasingSubsequence(int[] input) {
+        int size = input.length;
+        int[] result = new int[size];
+
+        for(int i = 0; i < size; i++) {
+            result[i] = 1;
+        }
+
+        for(int i = 0; i < size; i++) {
+            for(int j = 0; j < i; j++) {
+                if(input[j] < input[i]) {
+                    result[i] = Math.max(result[i], result[j] + 1);
+                }
+            }
+        }
+
+        int max = result[0];
+        for(int i = 1; i < size; i++) {
+            if(result[i] > max) {
+                max = result[i];
+            }
+        }
+        return max;
+    }
+
 
     public static void main(String[] args) {
         DPSolution objDP = new DPSolution();
-        int arr[] = new int[]{1, 101, 2, 3, 100, 4, 5};
+        int arr[] = new int[]{ 10, 22, 9, 33, 21, 50, 41, 60};
         int n = arr.length;
-        System.out.println("Sum of maximum sum increasing "+
+        System.out.println("increasing "+
                " subsequence is "+
-               objDP.maxSumSubarray( arr) );
+               objDP.longestIncreasingSubsequence( arr) );
 
     }
 }
