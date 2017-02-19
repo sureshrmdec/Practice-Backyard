@@ -336,9 +336,31 @@ public class LinkedList {
             previousNode = currentNode;
             currentNode = currentNode.next;
         }
-        
+
         previousNode.next = head;
         printList(secondList);
+    }
+
+    /*
+    *Problem :detect a loop in linked ListNode
+    *http://www.ideserve.co.in/learn/detect-a-loop-in-a-linked-list
+    *Flyod loop detection Algorithm
+    *Time Complexity: O(n); space Complexity :O(1)
+    */
+    public ListNode isListContainLoop(ListNode head) {
+        ListNode slowNode = head, fastNode = head;
+        if(head == null || head.next == null) return null;
+        while(slowNode != fastNode) {
+            if(slowNode == null || fastNode == null || fastNode.next == null) return null;
+            slowNode = slowNode.next;
+            fastNode = fastNode.next;
+        }
+        slowNode = head;
+        while(slowNode != fastNode) {
+            slowNode = slowNode.next;
+            fastNode = fastNode.next;
+        }
+        return slowNode;
     }
 
     public static void main(String[] args) {
