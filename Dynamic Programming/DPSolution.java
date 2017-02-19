@@ -97,15 +97,48 @@ public class DPSolution {
         }
         return max;
     }
+    /*Problem:http://www.ideserve.co.in/learn/nth-fibonacci-number
+    *Observation : Problem satisfies both optimal substructure and overlapping subproblem
+    *Time Complexity : O(n) and space Complexity : O(n)
+    */
+    public int nthFibonaci(int n) {
+        int[] result = new int[n + 1];
+        result[0] = 0;
+        result[1] = 1;
 
+        for(int i = 2; i <=n; i++) {
+            result[i] = result[i-1] + result[i-2];
+        }
+        return result[n];
+    }
 
+    /*Problem:http://www.ideserve.co.in/learn/maximum-subarray-sum (Contagious)
+    *Observation : Problem satisfies both optimal substructure and overlapping subproblem
+    *Time Complexity: O(n) ; Space Complexity :O(n)
+    */
+    public int maxContigiousSubarray(int[] input) {
+        int size = input.length;
+        int[] result = new int[size];
+
+        for(int i = 0; i < size; i++) {
+            result[i] = input[i];
+        }
+        for(int i = 1; i < size; i++) {
+            result[i] = Math.max(result[i], result[i-1] + result[i]);
+        }
+        int maxSum = result[0];
+        for(int i = 1; i < size; i++) {
+            if(result[i] > maxSum) {
+                maxSum = result[i];
+            }
+        }
+        return maxSum;
+    }
     public static void main(String[] args) {
         DPSolution objDP = new DPSolution();
-        int arr[] = new int[]{ 10, 22, 9, 33, 21, 50, 41, 60};
+        int arr[] = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
         int n = arr.length;
-        System.out.println("increasing "+
-               " subsequence is "+
-               objDP.longestIncreasingSubsequence( arr) );
+        System.out.println(objDP.maxContigiousSubarray(arr));
 
     }
 }
