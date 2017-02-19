@@ -56,3 +56,52 @@ A: HashMap                                  HashSet
                                             equality
     HashMap is fast as have unique
     elements                                slow comparison to HashMap
+
+
+Q: Differnce between HashMap and ConcurrentHashMap in java  ?
+A:
+1.  Concurrent HashMap is an alternate of hashTable so it provide syncronized and
+    thread safe implementation of HashMap
+2. HashMap can be converted to therad safe using Collection.syncronizedMap(map) but
+   with every operation, it will lock the complete map object while ConcurrentHashMap
+   will divide the map into differnt partition and lock only needed space.
+
+Q: Difference between String and StringBuilder in java ?
+A: String is immutable and StringBuilder is mutable, In comparison to StringBuilder
+and StringBuffer- StringBuffer is syncronized and provide thread safety
+
+Q: What is difference between Queue poll and remove ?
+A: if queue is empty then remove will throw exception while poll() will return null
+
+Q: What is fail safe and fail fast iterator in java ?
+A:
+1.  fail fast iterator will throw a concurrentModificationException as soon as they
+    found any structural change in collection during iteration
+2.  Fail fast iterator work over original collection while fail safe iterator Work
+    over a copy/view of collection. That's why we don't detect any  changes and mostly
+    we are working with stale values.
+3.  fail fast(ArrayList, HashSet and Vector) , fail safe(CopyOnWriteArrayList,
+    CopyOnWriteArraySet)
+4.  Iterator returned by synchronized collection are fail fast while iterator
+    returned by concurrent collection classes (CopyOnWriteArraySet) are fail safe
+
+Q: Difference between iterator remove and collection remove method ?
+A: if you traversing the list using iterator and in between you use collection
+   remove then it will throw concurrentModificationException.
+
+Q: Difference between Iterator and enumeration ?
+A: Iterator is a further step for traversing the list compared to enumeration
+   as it provide remove method ,also it's safe as if other thread try to change
+   underlying structure it will throw concurrentModification excecption
+
+Q: How is hashSet implemented in java ?
+A:  HashSet is implemented on top on HashMap where set values are keys of map to
+    provide uniqueness and all keys have duplicate values.
+
+Q: What to consider while making custom object as key in collection map?
+A:  you should always override equal and hashCode method. so that the map operation
+    are consisent. It will be able to insert and reterive based on key object.
+
+Q:  Difference between syncronizedHashMap, ConcurrentHashMap and HashTable ?
+A:  HashMap is syncronized while hashtable is not. ConcurrentHashMap is an updated
+    version of hashtable.
