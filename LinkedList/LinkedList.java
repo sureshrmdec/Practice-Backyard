@@ -362,6 +362,40 @@ public class LinkedList {
         }
         return slowNode;
     }
+    /*
+    *https://leetcode.com/problems/merge-two-sorted-lists/?tab=Description
+    */
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode currentNode1 = l1, currentNode2 = l2;
+        if(currentNode1 == null && currentNode2 == null) return null;
+        if(currentNode1 == null) return l2;
+        if(currentNode2 == null) return l1;
+
+        ListNode dummyHead = new ListNode(0);
+        ListNode dummyPointer = dummyHead;
+        while(currentNode1 != null && currentNode2 != null) {
+            if(currentNode1.val < currentNode2.val) {
+                dummyPointer.next = currentNode1;
+                currentNode1 = currentNode1.next;
+                dummyPointer = dummyPointer.next;
+            } else {
+                dummyPointer.next = currentNode2;
+                currentNode2 = currentNode2.next;
+                dummyPointer = dummyPointer.next;
+            }
+        }
+        while(currentNode1 != null) {
+            dummyPointer.next = currentNode1;
+            currentNode1 = currentNode1.next;
+            dummyPointer = dummyPointer.next;
+        }
+        while(currentNode2 != null) {
+            dummyPointer.next = currentNode2;
+            currentNode2 = currentNode2.next;
+            dummyPointer = dummyPointer.next;
+        }
+        return dummyHead.next;
+    }
 
     public static void main(String[] args) {
 
