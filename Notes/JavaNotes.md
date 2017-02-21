@@ -89,7 +89,7 @@ Q: Difference between iterator remove and collection remove method ?
 A: if you traversing the list using iterator and in between you use collection
    remove then it will throw concurrentModificationException.
 
-Q: Difference between Iterator and enumeration ?
+Q: Difference between Iterator and enu=meration ?
 A: Iterator is a further step for traversing the list compared to enumeration
    as it provide remove method ,also it's safe as if other thread try to change
    underlying structure it will throw concurrentModification excecption
@@ -105,3 +105,42 @@ A:  you should always override equal and hashCode method. so that the map operat
 Q:  Difference between syncronizedHashMap, ConcurrentHashMap and HashTable ?
 A:  HashMap is syncronized while hashtable is not. ConcurrentHashMap is an updated
     version of hashtable.
+
+Exception Handling:
+   The main objective of exception handling is graceful termination of program.
+   For every thread JVM will create a runtime stack, each entry is called activation record.
+
+Default Exception handling,is responsibility of method to create exception object with
+information such as name, description and stack trace. method handover exception to
+JVM and JVM will see if method contain any exception handling code ,if not it will
+remove stack entry and return to caller function ,untill it reaches the main thread
+and pass information to default Exception handler.
+
+Exception hirarchy :
+1. Throwable class act as root for java exception hirarchy - child class (Exception, error)
+2. Checked vs Unchecked Exception : Exception which are checked by compiler for smooth
+execution of program at runtime are called checked Exception.
+Errors and all it's child classes are unchecked Exception and all remaining are checked Exceptions
+
+A checked exception is fully checked if it's all child exception are fully checked.
+Try catch block is used for catching exception but catch block should have all block for
+all possible exception that can happen.
+
+printStackTrace(), getMessage(), toString() ,if different catch block is used then
+it should be in order of child to parent
+
+finally is the place to put all the clean up code - don't matter exception raised or not
+finally block dominate return statement so if your try block contain return statement then
+also finally will execute first -except System.exit
+final class cant have child class, a final method can't be overrided, final variable can't be
+re-referenced means can't assign to other object.
+
+finally is a clean up code segment associated with try catch whereas finalliaze method
+should be executed by Garbage Collector before destorying any object to perform clean activites
+
+In comparison to finalize you should use finally() as we can't predict JVM behavior
+Throw :
+   To create exception object manaually and handover object to JVM explicitly, After throw
+   no further statement otherwise it will throw unreachable statement
+   We can only use throw keyword only for throwable type, otherwise will get compiletime
+   error saying incompatible type
