@@ -174,11 +174,35 @@ public class ArraySolution {
         }
         return maxDifference;
     }
+
+    /*
+    *Problem :http://codereview.stackexchange.com/questions/65335/basic
+        -string-compression-counting-repeated-characters
+    */
+    public String stringCompression(String input) {
+        if (input.isEmpty()) return "";
+        char[] charArray = input.toCharArray();
+        int size = charArray.length;
+        StringBuilder sb = new StringBuilder();
+        int count = 1;
+        char previous = charArray[0];
+        for(int i = 1; i < size; i++) {
+            if(charArray[i] == previous) {
+                count++;
+            }else {
+                sb.append(previous).append(count);
+                count = 1;
+            }
+            previous = charArray[i];
+
+        }
+        return sb.append(previous).append(count).toString();
+    }
+
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int[] input = {3, 15, 10, 11, 2, 8, 4};
-        //objArraySol.reverseArray(input, 0, input.length-1);
-        System.out.println(objArraySol.maxDifference(input));
+        System.out.println(objArraySol.stringCompression("aaabbbccc"));
 
 
     }
