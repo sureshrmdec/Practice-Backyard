@@ -199,10 +199,23 @@ public class ArraySolution {
         return sb.append(previous).append(count).toString();
     }
 
+    public int findMaximumIncreasingDecreasingArray(int[] input, int low, int high) {
+        if(low == high) return input[low];
+        if(high == low + 1) return input[high] > input[low] ? input[high] : input[low];
+
+        int mid = low + (high - low)/2;
+        if(input[mid] > input[mid + 1] && input[mid] > input[mid -1]) return input[mid];
+        if(input[mid] > input[mid + 1] && input[mid] < input[mid -1]) {
+            return findMaximumIncreasingDecreasingArray(input, low, mid -1);
+        } else {
+            return findMaximumIncreasingDecreasingArray(input, mid +1, high);
+        }
+    }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
-        int[] input = {3, 15, 10, 11, 2, 8, 4};
-        System.out.println(objArraySol.stringCompression("aaabbbccc"));
+        int[] input = {8, 10, 20, 80, 100, 200, 400, 500, 3, 2, 1};
+        //System.out.println(objArraySol.stringCompression("aaabbbccc"));
+        System.out.println(objArraySol.findMaximumIncreasingDecreasingArray(input, 0, input.length - 1));
 
 
     }
