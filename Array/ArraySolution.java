@@ -236,7 +236,7 @@ public class ArraySolution {
    public String longestCommonPrefix(String[] input) {
        int size = input.length;
        if(size == 0) return "";
-
+    
        String prefix = input[0];
        for(int i = 0; i < size; i++) {
            while(input[i].indexOf(prefix) != 0) {
@@ -245,6 +245,19 @@ public class ArraySolution {
            }
         }
    return prefix;
+   }
+
+   public String longestCommonPrefixVerticalScan(String[] input) {
+       int size = input.length;
+       if(size == 0) return "";
+
+       for(int i = 0; i < input[0].length(); i++) {
+           char c = input[0].charAt(i);
+           for(int j = 1; j < size; i++) {
+               if(i == input[j].length() || input[j].charAt(i) != c) return input[0].substring(0, i);
+           }
+       }
+       return input[0];
    }
 
     public static void main(String[] args) {
