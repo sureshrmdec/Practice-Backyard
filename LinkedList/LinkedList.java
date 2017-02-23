@@ -397,6 +397,51 @@ public class LinkedList {
         return dummyHead.next;
     }
 
+    /**
+    Problem : Delete a node in linked list based on given node element
+    Link: https://leetcode.com/problems/delete-node-in-a-linked-list/?tab=Description
+    Time Complexity : O(1); space Complexity : O(1)
+    */
+    public void deleteNode(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
+
+    /**
+    Problem : Check if two linked list have an common intersection
+    Link :https://leetcode.com/problems/intersection-of-two-linked-lists/?tab=Description
+    Other great Solution : using retravesing the list with opposite list
+    https://discuss.leetcode.com/topic/5527/my-accepted-simple-and-shortest-c-code-with-comments-explaining-the-algorithm-any-comments-or-improvements
+    */
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+
+       int sizeListA = size(headA);
+       int sizeListB = size(headB);
+
+       ListNode currentNodeA = headA;
+       ListNode currentNodeB = headB;
+
+       if(sizeListB > sizeListA) {
+           int diff = sizeListB - sizeListA;
+           while(diff > 0) {
+               currentNodeB = currentNodeB.next;
+               diff--;
+           }
+       } else {
+          int diff = sizeListA - sizeListB;
+           while(diff > 0) {
+               currentNodeA = currentNodeA.next;
+               diff--;
+           }
+       }
+       while(currentNodeA != null) {
+           if(currentNodeA == currentNodeB) return currentNodeA;
+           currentNodeA = currentNodeA.next;
+           currentNodeB = currentNodeB.next;
+       }
+       return null;
+       }
+
     public static void main(String[] args) {
 
         LinkedList llist = new LinkedList();
