@@ -211,6 +211,42 @@ public class ArraySolution {
             return findMaximumIncreasingDecreasingArray(input, mid +1, high);
         }
     }
+
+    /**
+    Problem : Check if the array contains duplciate element or not
+    Link: https://leetcode.com/problems/contains-duplicate/?tab=Description
+    Time Complexity : O (n); space Complexity : O(n)
+    */
+    public boolean containsDuplicate(int[] input) {
+        int size = input.length;
+       if(size  == 0) return false;
+       Set<Integer> uniqueSet = new HashSet<>();
+       for(int i = 0; i < size; i++) {
+           if(uniqueSet.contains(input[i])) return true;
+           uniqueSet.add(input[i]);
+       }
+       return false;
+   }
+
+   /**
+   *Problem : find the longest common prefix in the string array
+   * Link :https://leetcode.com/articles/longest-common-prefix/
+   *Time Complexity : O(S) where S is sum of all character count in the string array
+   */
+   public String longestCommonPrefix(String[] input) {
+       int size = input.length;
+       if(size == 0) return "";
+
+       String prefix = input[0];
+       for(int i = 0; i < size; i++) {
+           while(input[i].indexOf(prefix) != 0) {
+               prefix = prefix.substring(0, prefix.length() -1);
+               if(prefix == "") return "";
+           }
+        }
+   return prefix;
+   }
+
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int[] input = {8, 10, 20, 80, 100, 200, 400, 500, 3, 2, 1};
