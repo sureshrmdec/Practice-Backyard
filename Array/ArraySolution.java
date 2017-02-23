@@ -236,7 +236,7 @@ public class ArraySolution {
    public String longestCommonPrefix(String[] input) {
        int size = input.length;
        if(size == 0) return "";
-    
+
        String prefix = input[0];
        for(int i = 0; i < size; i++) {
            while(input[i].indexOf(prefix) != 0) {
@@ -260,6 +260,27 @@ public class ArraySolution {
        return input[0];
    }
 
+   /**
+   Problem : Move Zeros
+   Link : https://leetcode.com/problems/move-zeroes/
+   Time Complexity : O(n) and space complexity : O(1)
+   */
+   public void moveZeroes(int[] input) {
+       if(input.length == 0) return;
+
+       int counter = 0;
+       int size = input.length;
+       for(int i = 0; i < size; i++) {
+           if(input[i] != 0) {
+               input[counter] = input[i];
+               counter++;
+           }
+       }
+       while(counter < size) {
+           input[counter] = 0;
+           counter++;
+       }
+   }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int[] input = {8, 10, 20, 80, 100, 200, 400, 500, 3, 2, 1};
