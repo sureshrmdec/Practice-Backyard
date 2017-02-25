@@ -281,6 +281,33 @@ public class ArraySolution {
            counter++;
        }
    }
+
+   /**
+   *problem : Check if a string is valid palindrome
+   Link : https://leetcode.com/problems/valid-palindrome/
+   *Time Complexity :
+   */
+   public boolean isPalindrome(String s) {
+
+        if(s.length() == 0) return true;
+        char[] charArray = s.toLowerCase().toCharArray();
+        int low = 0;
+        int high = charArray.length - 1;
+
+        while (low <= high) {
+            if(!Character.isLetterOrDigit(charArray[low])) {
+                low++;
+            }else if(!Character.isLetterOrDigit(charArray[high])) {
+                high--;
+            }
+            else {
+                if (charArray[low] != charArray[high]) return false;
+                low++;
+                high--;
+            }
+        }
+        return true;
+    }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int[] input = {8, 10, 20, 80, 100, 200, 400, 500, 3, 2, 1};
