@@ -308,6 +308,61 @@ public class ArraySolution {
         }
         return true;
     }
+
+    /**
+    Problem : Minimum number of gates required so no planes keeps standing
+    *Problem Link:https://www.careercup.com/question?id=5679778427305984
+    *Time Complexity : O(n) as the inner loop is bounded by 1440 minuts of day
+    *Space Complexity : O(n) - due to use of hashMap
+    */
+    public int maxGates(int[] arrivalTime, int[] deptTime) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int maxValue = 0;
+        for(int i = 0; i < arrivalTime.length; i++) {
+            int a = arrivalTime[i];
+            int d = deptTime[i];
+
+            // Store each second how many plane needs gate
+            for(int i = a; i < d; i++) {
+                int count = map.containsKey(i) ? map.get(i) : 0;
+                map.put(i, count + 1);
+            }
+        }
+
+        //Calculate the maxValue;
+        for(Integer n : map.values()) {
+            if(n > maxValue) maxValue = n;
+        }
+        return maxValue;
+    }
+
+    /**
+    *Problem : Given a string sort it's letter by frequency
+    *Observation : We can keep an array of character and keep increasing it count
+    */
+
+    public String frequencyArrangement(String input) {
+        char[] charArray = input.toCharArray();
+        Map<character, Integer> map = new HashMap<>();
+
+        for(int i = 0; i < charArray.size; i++) {
+            char temp = charArray[i];
+            if(!Character.isLetter(temp)) continue;
+            if(map.containsKey(temp)) map.put(temp, map.get(temp) + 1);
+            map.put(temp, 1);
+        }
+
+        List<Entry<Character, Integer>> charCount =
+                new ArrayList<Entry<Character, Integer>>(map.entrySet());
+        Collections.sort(charCount, new frequencyComparator(Entry<Character, Integer>));
+    }
+
+    publlic class frequencyComparator implements Comparator {
+        public int Compare(Entry<Character, Integer> o1, Entry<Character, Integer> o2) {
+            Float diff = (02.getValue() - o1.getValue());
+            return diff.intValue();
+        }
+    }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int[] input = {8, 10, 20, 80, 100, 200, 400, 500, 3, 2, 1};
