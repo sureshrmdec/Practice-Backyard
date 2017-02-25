@@ -134,11 +134,27 @@ public class DPSolution {
         }
         return maxSum;
     }
+
+    public int rob(int[] input) {
+        int size = input.length;
+        if(size == 0) return 0;
+        int[] result = new int[size];
+        for(int i = 0; i < size; i++) {
+            result[i] = input[i];
+        }
+
+        result[1] = Math.max(result[1], result[0]);
+        for(int i = 2; i < size; i++) {
+            result[i] = Math.max(result[i] + result[i-2], result[i-1]);
+        }
+        return result[size -1];
+    }
+
     public static void main(String[] args) {
         DPSolution objDP = new DPSolution();
-        int arr[] = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
-        int n = arr.length;
-        System.out.println(objDP.maxContigiousSubarray(arr));
+        int arr[] = new int[]{1, 4, 1, 1};
+        System.out.println(objDP.rob(arr));
+
 
     }
 }
