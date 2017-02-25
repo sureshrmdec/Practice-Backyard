@@ -119,6 +119,20 @@ public class Trees {
         //if one is empty and other is not
         return false;
     }
+    /**
+    *Problem : Check if a tree is symmetric about it's center
+    *Link :https://leetcode.com/problems/symmetric-tree/?tab=Description
+    */
+    public boolean isSymmetric(TreeNode root) {
+      if (root == null) return true;
+      return symmetricNode(root.left, root.right);
+    }
+
+  public boolean symmetricNode(TreeNode left, TreeNode right) {
+      if(left == null || right == null) return left == right;
+      if(left.val != right.val) return false;
+      return (symmetricNode(left.left, right.right) && symmetricNode(left.right, right.left));
+    }
 
     public static void main(String[] args) {
         Trees tree = new Trees();
