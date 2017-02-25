@@ -412,9 +412,31 @@ public class ArraySolution {
         return result;
     }
 
+    /**
+    *Problem : find the min in array that decreases and then increases
+    *Link :https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+    *Time Complexity : O(nlogn) : Classical Binary Search
+    */
+    public int findMinRotatedArray(int[] input) {
+        int size = input.length;
+        int low = 0;
+        int high = size - 1;
+
+        if(size == 0) return -1;
+        if(input[low] < input[high]) return input[0];
+        while(low < high) {
+            if (input[low]< input[high]) {
+                return input[low];
+            }
+            int mid = low + (high - low)/2;
+            if(input[low] <= input[mid]) low = mid + 1;
+            else high = mid;
+        }
+        return input[low];
+    }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
-        int[] input = {1, 1, 2, 2, 3, 4, 4, 5, 6};
-        System.out.println(objArraySol.reverseInteger(527));
+        int[] input = {4,5,6,7,1,2,3};
+        System.out.println(objArraySol.findMinRotatedArray(input));
     }
 }
