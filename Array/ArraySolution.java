@@ -1,5 +1,7 @@
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -316,16 +318,16 @@ public class ArraySolution {
     *Space Complexity : O(n) - due to use of hashMap
     */
     public int maxGates(int[] arrivalTime, int[] deptTime) {
-        Map<Integer, Integer> map = new HashMap<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
         int maxValue = 0;
         for(int i = 0; i < arrivalTime.length; i++) {
             int a = arrivalTime[i];
             int d = deptTime[i];
 
             // Store each second how many plane needs gate
-            for(int i = a; i < d; i++) {
-                int count = map.containsKey(i) ? map.get(i) : 0;
-                map.put(i, count + 1);
+            for(int k = a; i < d; k++) {
+                int count = map.containsKey(k) ? map.get(k) : 0;
+                map.put(k, count + 1);
             }
         }
 
@@ -340,35 +342,79 @@ public class ArraySolution {
     *Problem : Given a string sort it's letter by frequency
     *Observation : We can keep an array of character and keep increasing it count
     */
+    // public String frequencyArrangement(String input) {
+    //     char[] charArray = input.toCharArray();
+    //     Map<character, Integer> map = new HashMap<>();
+    //
+    //     for(int i = 0; i < charArray.size; i++) {
+    //         char temp = charArray[i];
+    //         if(!Character.isLetter(temp)) continue;
+    //         if(map.containsKey(temp)) map.put(temp, map.get(temp) + 1);
+    //         map.put(temp, 1);
+    //     }
+    //
+    //     List<Entry<Character, Integer>> charCount =
+    //             new ArrayList<Entry<Character, Integer>>(map.entrySet());
+    //     Collections.sort(charCount, new frequencyComparator(Entry<Character, Integer>));
+    // }
+    //
+    // class frequencyComparator implements Comparator {
+    //     public int Compare(Entry<Character, Integer> o1, Entry<Character, Integer> o2) {
+    //         Float diff = (o2.getValue() - o1.getValue());
+    //         return diff.intValue();
+    //     }
+    // }
 
-    public String frequencyArrangement(String input) {
-        char[] charArray = input.toCharArray();
-        Map<character, Integer> map = new HashMap<>();
+    /**
+    *Problem : find the first unique element in array
+    *Observation : create a map containg the count of each element in array and
+    * scan again to see if any of the element count is 1.
+    *Time complexity : O(n) and space complexity : O(n)
+    */
 
-        for(int i = 0; i < charArray.size; i++) {
-            char temp = charArray[i];
-            if(!Character.isLetter(temp)) continue;
-            if(map.containsKey(temp)) map.put(temp, map.get(temp) + 1);
-            map.put(temp, 1);
+    public int firstUniqueElement(int[] input) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        if(input.length == 0) return -1;
+        for(int i = 0; i < input.length; i++) {
+            if(map.containsKey(input[i])) map.put(input[i], map.get(input[i]) + 1);
+            else map.put(input[i], 1);
         }
 
-        List<Entry<Character, Integer>> charCount =
-                new ArrayList<Entry<Character, Integer>>(map.entrySet());
-        Collections.sort(charCount, new frequencyComparator(Entry<Character, Integer>));
+        for(int i = 0; i < input.length; i++) {
+            if (map.get(input[i]) == 1) return input[i];
+        }
+        return -1;
     }
 
-    publlic class frequencyComparator implements Comparator {
-        public int Compare(Entry<Character, Integer> o1, Entry<Character, Integer> o2) {
-            Float diff = (02.getValue() - o1.getValue());
-            return diff.intValue();
+    /**
+    *Problem :reverse an Integer
+    *Link: https://leetcode.com/problems/reverse-integer/
+    Time Complexity : O(n); space Complexity : O(1)
+    */
+    public int reverseInteger(int n) {
+        if(n == 0) return 0;
+        boolean flag = false;
+        int result = 0;
+        if(n < 0) {
+            n = 0 - n;
+            flag = true;
         }
+
+        while(n > 0) {
+            int digit = n % 10;
+            result = result * 10 + digit;
+            n = n / 10;
+        }
+        if(flag) {
+            result =  0 - result;
+        }
+        if( result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) return 0;
+        return result;
     }
+
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
-        int[] input = {8, 10, 20, 80, 100, 200, 400, 500, 3, 2, 1};
-        //System.out.println(objArraySol.stringCompression("aaabbbccc"));
-        System.out.println(objArraySol.findMaximumIncreasingDecreasingArray(input, 0, input.length - 1));
-
-
+        int[] input = {1, 1, 2, 2, 3, 4, 4, 5, 6};
+        System.out.println(objArraySol.reverseInteger(527));
     }
 }
