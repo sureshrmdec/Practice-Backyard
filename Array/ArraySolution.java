@@ -434,9 +434,29 @@ public class ArraySolution {
         }
         return input[low];
     }
+
+    /**
+    *Problem: Replace a string in place
+    *Link :
+    */
+    public String reverseStringInPlace(String input) {
+        int size = input.length();
+        if(size < 2) return input;
+        int low = 0;
+        int high = size -1;
+        StringBuilder sb = new StringBuilder(input);
+        while(low < high) {
+            char temp = sb.charAt(high);
+            sb.setCharAt(high, sb.charAt(low));
+            sb.setCharAt(low, temp);
+            low++;
+            high--;
+        }
+        return sb.toString();
+    }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int[] input = {4,5,6,7,1,2,3};
-        System.out.println(objArraySol.findMinRotatedArray(input));
+        System.out.println(objArraySol.reverseStringInPlace("VIPIN"));
     }
 }
