@@ -199,6 +199,51 @@ public class Trees {
         return (hasPathWithSum(root.left, sum -root.val)|| hasPathWithSum(root.right, sum - root.val));
     }
 
+    /**
+    *Problem: Invert a Binary TreeNode
+    *Link :https://leetcode.com/problems/invert-binary-tree/
+    *Time Complexity : O(n) using recurrision since in worst case all n nodes will be visited
+    *Space Complexity : O(h) : height of tree
+    */
+    public TreeNode invertTree(TreeNode root) {
+        if(root == null) return null;
+        TreeNode left = invertTree(root.left);
+        TreeNode right = invertTree(root.right);
+        root.left = right;
+        ro  ot.right = left;
+        return root;
+    }
+
+    /**
+    *Problem: Invert a Binary TreeNode
+    *Link :https://leetcode.com/problems/invert-binary-tree/
+    *Time Complexity : O(n) in worst case queue hold all the elements
+    *Space Complexity : O(n) for queue space
+    */
+    public TreeNode invertTreeBFS(TreeNode root) {
+        if(root == null) return null
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while(!queue.isEmpty()) {
+            TreeNode temp = queue.poll();
+            TreeNode left, right;
+            if(temp.left != null) left = temp.left;
+            if(temp.right != null) right = temp.right;
+            temp.left = right;
+            temp.right = left;
+            queue.offer(right);
+            queue.offer(left);
+        }
+        return root;
+    }
+
+    /**
+    *Problem: Find a lowest common ancester of BST
+    *Link : https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
+    *Time Complexity : 
+    */
+
     public static void main(String[] args) {
         Trees tree = new Trees();
         tree.root = new TreeNode(5);
