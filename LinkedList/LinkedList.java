@@ -442,6 +442,42 @@ public class LinkedList {
        return null;
        }
 
+    /**
+    *Problem : Swap linked list elements in pairs
+    *Link: https://leetcode.com/problems/swap-nodes-in-pairs/
+    *Time Complexity : O(n) in worst case as it will call n/2 stack call
+    *Space Complexity : O(1)
+    */
+    public ListNode swapPair(ListNode root) {
+        if(root == null || root.next == null) return root;
+        ListNode n = head.next;
+        head.next = swapPair(head.next.next);
+        n.next = head;
+        return n;
+    }
+
+    /**
+    *Problem : Swap linked list elements in pairs
+    *Link: https://leetcode.com/problems/swap-nodes-in-pairs/
+    *Time Complexity : O(n) to traverse the list
+    *Space Complexity : O(1)
+    */
+    public ListNode swapPair(ListNode root) {
+        if(root == null || root.next == null) return root;
+        ListNode dummyHead = new ListNode(0);
+        dummyHead.next = root;
+        ListNode currentNode = dummyHead;
+        while(currentNode.next != null && currentNode.next.next != null) {
+            ListNode first = currentNode.next;
+            ListNode second = currentNode.next.next;
+            currentNode.next = second;
+            first.next = second.next;
+            second.next  = first;
+            currentNode = first;
+        }
+        return dummyHead.next;
+    }
+
     public static void main(String[] args) {
 
         LinkedList llist = new LinkedList();
