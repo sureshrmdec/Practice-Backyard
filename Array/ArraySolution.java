@@ -535,6 +535,33 @@ public class ArraySolution {
         result.add(new Interval(start, end));
         return result;
     }
+
+    /**
+    *Problem : Check if two string is valid anagram
+    *Link:
+    *Time Complexity : O(n) and space Complexity : O(n)
+    */
+    public boolean isAnagram(String s, String t) {
+       if(s == null || t == null || s.length() != t.length()) return false;
+       int[] charCount = new int[26];
+       for(int i = 0; i < s.length(); i++) {
+           int c = s.charAt(i) -'a';
+           if(charCount[c] != 0) charCount[c] += 1;
+           else charCount[c] = 1;
+       }
+       
+       for(int i = 0; i < t.length(); i++) {
+           int c = t.charAt(i) -'a';
+           if(charCount[c] != 0) charCount[c] -= 1;
+           else charCount[c] = 1;
+       }
+
+       for(int i = 0; i <charCount.length; i++) {
+           if(charCount[i] != 0) return false;
+       }
+       return true;
+   }
+
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int[] input = {4,5,6,7,1,2,3};
