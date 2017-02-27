@@ -1,7 +1,10 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -580,6 +583,35 @@ public class ArraySolution {
             }
         }
         return new ArrayList<List<String>>(map.values());
+    }
+
+    /**
+    *Problem : Convert an string to Integer
+    *Problem Link :https://leetcode.com/problems/string-to-integer-atoi/
+    *Solution Link: https://github.com/vtiwari227/Coding-Practice/blob/master/LeetCode/atoi.java
+    *Observation : Understand the question which is intenionally vague in nature and consider all
+    edge cases
+    *Time Complexity : O(n) ; space Complexity : O(1)
+    */
+    public int atoi(String input) {
+        if(input.length() == 0 || input == null) return 0;
+        int index = 0, sign = 1;
+        long sum = 0;
+        input = input.trim();
+        if(input.charAt(0) == '+') {
+            sign = 1;
+            index++;
+        } else {
+            sign = -1;
+            index++;
+        }
+        for(int i = index; i < input.length(); i++) {
+            if( !Character.isDigit(input.charAt(i))) return (int) sum * sign;
+            sum = sum * 10 + input.charAt(i) -'0';
+            if(sign == 1 && sum > Integer.MAX_VALUE) return Integer.MAX_VALUE;
+            if(sign == -1 && (-1) * sum < Integer.MIN_VALUE) return Integer.MIN_VALUE;
+        }
+        return (int) sum * sign;
     }
 
     public static void main(String[] args) {
