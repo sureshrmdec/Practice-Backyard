@@ -179,12 +179,23 @@ public class DPSolution {
     }
 
     /**
-    Problem : minimum number of coin required to reach  specific a
-    *Link : https://leetcode.com/problems/coin-change/
-    *Time Complexity: O(n) and space Complexity :O(n)
+    *Problem : check if string matches with list of words in segments
+    *Link :https://leetcode.com/problems/word-break/?tab=Description
+    *Time Complexity : O(n^2) and space Complexity : O(n)
     */
-    public int coinChangeDP(int[] input) {
+    public boolean wordBreak(String s, List<String> wordDict) {
+     boolean[] result = new boolean[s.length() + 1];
+     result[0] = true;;
 
+     for(int i = 1; i <= s.length(); i++) {
+         for(int j = 0; j < i; j++) {
+             if(result[j] && wordDict.contains(s.substring(j,i))) {
+                 result[i] = true;
+                 break;
+             }
+         }
+     }
+     return result[s.length()];
     }
 
     public static void main(String[] args) {
