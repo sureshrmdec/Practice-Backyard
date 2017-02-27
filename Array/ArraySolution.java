@@ -454,9 +454,66 @@ public class ArraySolution {
         }
         return sb.toString();
     }
+
+    /**
+    *Problem : Joseph Circle : Problem of last survivor
+    *Observation : if the number of person are even then after each iteration half
+    of the elements will be left and the same starting person will hold the gun
+    Let's assume K is the gap in consecutive elements so output will be
+    2*(N-2^k) + 1; - Perform operation in binary format
+    *Another observation is to move the first bit to last position(circular shift)
+    */
+    public double JosephSurvivor(int n, int k) {
+        return 2*(n - Math.pow(2, k)) + 1;
+    }
+
+    /**
+    *Problem :Best Time to buy and sell stock
+    *Link :https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/?tab=Solutions
+    *Time Complexity : O(n) and space Complexity :O(1)
+    *Observation : if there is long chain of profit ,it will always come from two
+    consecutive pair so if it's all the sum of consecutive pair ,and if negative return 0;
+    */
+    public int maxProfit(int[] prices) {
+        int result = 0;
+        int size = prices.length;
+        for(int i = 1; i < size; i++) {
+            result += Math.max(prices[i] - prices[i-1], 0);
+        }
+        return result;
+    }
+
+    public int sqrtNumber(int n) {
+        if(n == 0 || n == 1) return n;
+        int i = 1, result = 1;
+        while(result <= n) {
+            i++;
+            result = i*i;
+        }
+        return i - 1;
+    }
+
+    public int sqrtNumberBinarySearch(int n) {
+        if(n == 0 || n == 1) return n;
+        int low = 1;
+        int high = n;
+        int ans = 0;
+        while(low <= high) {
+            int mid = low + (high - low)/2;
+            if(mid * mid == n) return mid;
+
+            if (mid * mid  < n) {
+                ans = mid;
+                low = mid + 1;
+            } else {
+                high = mid -1;
+            }
+        }
+        return ans;
+    }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int[] input = {4,5,6,7,1,2,3};
-        System.out.println(objArraySol.reverseStringInPlace("VIPIN"));
+        System.out.println(objArraySol.sqrtNumberBinarySearch(16));
     }
 }
