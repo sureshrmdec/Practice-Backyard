@@ -150,10 +150,47 @@ public class DPSolution {
         return result[size -1];
     }
 
+    /**
+    *Problem :Mininum jump to reach to end of array
+    *Link :https://leetcode.com/problems/jump-game-ii/
+    *Time Complexity : O(n^2) and space complexity : O(n)
+    */
+    public int minJumpDP(int[] input) {
+        int size = input.length;
+        int[] jump = new int[size];
+        int[] jumpPath = new int[size];
+
+        jump[0] = 0;
+        for(int i = 1; i < size; i++) {
+            jump[i] = Integer.MAX_VALUE;
+        }
+
+        for(int i = 1; i < size; i++) {
+            for(int j = 0; j < i; j++) {
+                if(input[j] + j >= i) {
+                    if(jump[j] + 1 < jump[i]) {
+                        jump[i] = jump[j]  + 1;
+                        jumpPath[i] = j;
+                    }
+                }
+            }
+        }
+        return jump[size - 1];
+    }
+
+    /**
+    Problem : minimum number of coin required to reach  specific a
+    *Link : https://leetcode.com/problems/coin-change/
+    *Time Complexity: O(n) and space Complexity :O(n)
+    */
+    public int coinChangeDP(int[] input) {
+
+    }
+
     public static void main(String[] args) {
         DPSolution objDP = new DPSolution();
-        int arr[] = new int[]{1, 4, 1, 1};
-        System.out.println(objDP.rob(arr));
+        int arr[] = new int[]{2,3,1,1,4};
+        System.out.println(objDP.minJumpDP(arr));
 
 
     }
