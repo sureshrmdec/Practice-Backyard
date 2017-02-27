@@ -511,6 +511,30 @@ public class ArraySolution {
         }
         return ans;
     }
+    /**
+    *Problem : Merge overlapping intervals
+    *Link: https://leetcode.com/problems/merge-intervals/
+    *Time Complexity : o(nlogn) to sort the interval based on start time
+    */
+    public List<Interval> merge(List<Interval> intervals) {
+        if(intervals.size() < 2) return intervals;
+        intervals.sort((l1, l2) -> Integer.compare(l1.start, l2.start));
+        List<Interval> result = new LinkedList<>();
+        int start = intervals.get(0).start;
+        int end = intervals.get(0).end;
+
+        for(Interval e : intervals) {
+            if(e.start <= end) {
+                end = Math.max(end, e.end);
+            }else {
+                result.add(new Interval(start, end));
+                start = e.start;
+                end = e.end;
+            }
+        }
+        result.add(new Interval(start, end));
+        return result;
+    }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int[] input = {4,5,6,7,1,2,3};
