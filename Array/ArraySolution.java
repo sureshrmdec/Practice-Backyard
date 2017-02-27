@@ -549,7 +549,7 @@ public class ArraySolution {
            if(charCount[c] != 0) charCount[c] += 1;
            else charCount[c] = 1;
        }
-       
+
        for(int i = 0; i < t.length(); i++) {
            int c = t.charAt(i) -'a';
            if(charCount[c] != 0) charCount[c] -= 1;
@@ -561,6 +561,26 @@ public class ArraySolution {
        }
        return true;
    }
+   /**
+   *Problem : find the element set in list that form anagram together
+   *Link: https://leetcode.com/problems/anagrams/
+   *Time Complexity : O(nlong) for sorting + O(n) space and time for hashmap and looping
+   */
+   public List<List<String>> groupAnagrams(String[] strs) {
+        if(strs == null || strs.length == 0) return new ArrayList<List<String>>();
+        Map<String, List<String>> map = new HashMap<String, List<String>>();
+        for(String s : strs) {
+            char[] ch = s.toCharArray();
+            Arrays.sort(ch);
+            String key = String.valueOf(ch);
+            if(map.containsKey(key)) map.get(key).add(s);
+            else {
+                map.put(key, new ArrayList<>());
+                map.get(key).add(s);
+            }
+        }
+        return new ArrayList<List<String>>(map.values());
+    }
 
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
