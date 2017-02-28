@@ -8,6 +8,12 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+
+/**
+Common Tricks to solve Array Problems:
+    1. Solve using example for small test cases and see if you can generalize
+    2. Sort the array use two pointer
+*/
 public class ArraySolution {
 
     private static final int MAX = 10000;
@@ -238,7 +244,6 @@ public class ArraySolution {
             input[start] = input[end];
             input[end] = temp;
             reverseArray(input, start+1, end-1);
-
     }
 
     public static void printArray(int[] input) {
@@ -292,19 +297,24 @@ public class ArraySolution {
         }
         return sb.append(previous).append(count).toString();
     }
+      /**
+      *Problem : find Maximimum in the array which increases and then decreases
+      *Observation : This problem is just another variant of binary search , only
+      consideration is to put boundary for selecting the sub array for binary search
+      *Time complexity : O(logn); space complexity : O(logn) stack call space
+      */
+      public int findMaximumIncreasingDecreasingArray(int[] input, int low, int high) {
+         if(low == high) return input[low];
+         if(high == low + 1) return input[high] > input[low] ? input[high] : input[low];
 
-    public int findMaximumIncreasingDecreasingArray(int[] input, int low, int high) {
-        if(low == high) return input[low];
-        if(high == low + 1) return input[high] > input[low] ? input[high] : input[low];
-
-        int mid = low + (high - low)/2;
-        if(input[mid] > input[mid + 1] && input[mid] > input[mid -1]) return input[mid];
-        if(input[mid] > input[mid + 1] && input[mid] < input[mid -1]) {
+         int mid = low + (high - low)/2;
+         if(input[mid] > input[mid + 1] && input[mid] > input[mid -1]) return input[mid];
+         if(input[mid] > input[mid + 1] && input[mid] < input[mid -1]) {
             return findMaximumIncreasingDecreasingArray(input, low, mid -1);
-        } else {
+         } else {
             return findMaximumIncreasingDecreasingArray(input, mid +1, high);
-        }
-    }
+         }
+      }
 
     /**
     Problem : Check if the array contains duplciate element or not
@@ -379,7 +389,7 @@ public class ArraySolution {
    /**
    *problem : Check if a string is valid palindrome
    Link : https://leetcode.com/problems/valid-palindrome/
-   *Time Complexity :
+   *Time Complexity : O(n) -scanning list once; space Complexity :O(1)
    */
    public boolean isPalindrome(String s) {
 
@@ -483,26 +493,26 @@ public class ArraySolution {
     *Link: https://leetcode.com/problems/reverse-integer/
     Time Complexity : O(n); space Complexity : O(1)
     */
-    public int reverseInteger(int n) {
-        if(n == 0) return 0;
-        boolean flag = false;
-        int result = 0;
-        if(n < 0) {
-            n = 0 - n;
-            flag = true;
-        }
+   public int reverseInteger(int n) {
+      if(n == 0) return 0;
+      boolean flag = false;
+      long result = 0;
+       if(n < 0) {
+         n = 0 - n;
+         flag = true;
+     }
 
-        while(n > 0) {
-            int digit = n % 10;
-            result = result * 10 + digit;
-            n = n / 10;
-        }
-        if(flag) {
-            result =  0 - result;
-        }
-        if( result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) return 0;
-        return result;
-    }
+     while(n > 0) {
+         int digit = n % 10;
+         result = result * 10 + digit;
+         n = n / 10;
+     }
+     if(flag) {
+         result =  0 - result;
+     }
+     if( result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) return 0;
+     return result;
+   }
 
     /**
     *Problem : find the min in array that decreases and then increases
@@ -529,7 +539,8 @@ public class ArraySolution {
 
     /**
     *Problem: Replace a string in place
-    *Link :
+    *Link :https://leetcode.com/problems/reverse-string/
+    *Time Complexity : O(n) and O(1) space Complexity
     */
     public String reverseStringInPlace(String input) {
         int size = input.length();
@@ -539,7 +550,7 @@ public class ArraySolution {
         StringBuilder sb = new StringBuilder(input);
         while(low < high) {
             char temp = sb.charAt(high);
-            sb.setCharAt(high, sb.charAt(low));
+            sb.setCharAt(high, sb.charAt(low)); // setCharAt to set char in string
             sb.setCharAt(low, temp);
             low++;
             high--;
