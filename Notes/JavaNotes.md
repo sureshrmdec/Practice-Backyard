@@ -144,3 +144,80 @@ Throw :
    no further statement otherwise it will throw unreachable statement
    We can only use throw keyword only for throwable type, otherwise will get compiletime
    error saying incompatible type
+
+Copy on write is a technique where callers use resource object on shared basis until
+some one wants to modify the object. if that happens then it will create a copy of that object
+
+ClassCastException : When you want to sort object naturally but class don't implement comparable Interface
+
+Example of Comparator :
+
+public int ReverseNumericalOrder implements Comparator<Integer> {
+    @overridede
+    public int compare(Integer o1, Integer o2) {
+        return  o2 - o1;
+        // negative : first argument should come before o2 in sorted order
+    }
+}
+
+@Test
+public void customSorting() {
+    final List<Integers> numbers = Arrays.asList(4, 7, 1, 6, 3, 5, 4);
+    final List<Integer> expected = Arrays.asList(7, 6, 5, 4, 4, 3, 1);
+    Collections.sort(numbers, new ReverseNumericalOrder());
+    assertEquals(numbers, expected);
+}
+
+Static in java:
+    static variable and method belong to class and they are commom to all instances
+    You can update the variable value either through class or instance but to avoid
+    confusion with object variable ,use class reference.
+
+Polymorphism : (https://www.tutorialspoint.com/java/java_polymorphism.htm)
+    ability of object to take many forms,a java object that can pass IS-A relationship
+    Virtual method ensures that overriden method is exectued at run time , no matter
+    at compile time what reference method have been associated with.
+    Polymorphism can be thought of using a sub class when super class has been asked for
+
+Abstraction : (https://www.tutorialspoint.com/java/java_abstraction.htm)
+   It's the quality of idea rather than events, Abstraction is process of hiding
+   the implementation details from user,only functionality will be provided
+   User know what object does not how it does it ?
+
+   Java provides abstraction through abstract classes , where each abstract class
+   can have one more abstract method along with typical implemented methods, a java
+   class needs to inherit the abstract class and implement all the abstracts method
+
+   If you want a method implementation to be supported by it's child classes then
+   mark that as abstract and also mark the class as abstract.
+
+   The child class can override the method or create a hirarchy of abstract class
+
+Inhertiance:
+   When a new object of child class is created as copy of parent class object is intialized
+   in child class
+   HAS-A releationhip provide code resuability and clarity to support functionality
+   such as Viechle has a speed. you can either put all code in viechle class or create
+   a speed class and use in mutiple ways
+
+Two Equals object must return same hashCode
+The relationship betweens equals and hashCode work in needed fashion because of the way
+other data structure such as hashmap are implemented
+
+Arrays are object,can be victim of changes due to various references in diffrent part
+of code/threads
+
+String are at so core of java programming language that JVM treats string very specially
+that you don't need to use new keyword for string literal.Internally String is a char
+sequence.
+
+String.intern() will make reference to alreday defined string memomry object in constant pool
+but be careful about number of usage ,since this memory space is differnt than heap and called
+permanent gen which typcially hold non user object such as class,method and internal java object
+intern() can overflow the memory
+
+Generics :
+How type variance affects generics ?
+Co-variant : an array of type T can hold data of type T or subtype of t
+java genereics are type erasure at run time
+What does reified mean ?
