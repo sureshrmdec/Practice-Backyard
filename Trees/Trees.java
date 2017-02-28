@@ -239,11 +239,25 @@ public class Trees {
     }
 
     /**
-    *Problem: Find a lowest common ancester of BST
-    *Link : https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
-    *Time Complexity : 
+    *Problem: level order traversal using DFS
+    *Link : https://discuss.leetcode.com/topic/7332/java-solution-using-dfs
+    *Time Complexity : O(n) at worst all n nodes will be visited and O(h) stack call space
     */
+    public List<List<Integer>> inorderTraversalDFS(TreeNode root) {
+        List<List<Integer>> result = new LinkedList<List<Integer>>();
+        inorderDFSUtil(result, root, 0);
+        return result;
+    }
 
+    public List<List<Integer>> inorderDFSUtil(List<List<Integer>> res, TreeNode root, int level) {
+        if(root == null) return;
+        if(level >= levelResult) {
+            res.add(new LinkedList<Integer>());
+        }
+        res.get(height).add(root);
+        inorderDFSUtil(res, root.left, level + 1);
+        inorderDFSUtil(res, root.right, level + 1);
+    }
     public static void main(String[] args) {
         Trees tree = new Trees();
         tree.root = new TreeNode(5);
