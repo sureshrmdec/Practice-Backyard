@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class DPSolution {
 
     /**
@@ -223,10 +225,34 @@ public class DPSolution {
 	return grid[m - 1][n - 1];
     }
 
+    /**
+    *Problem : subset sum problem using DP
+    *Link :https://github.com/mission-peace/interview/blob/master/src/com/interview/dynamic/SubsetSum.java
+    *Time Complexity: O(array.length*total); space Complexity: O(array.length *total)
+    */
+    public boolean subSetSum(int[] input, int total) {
+        boolean[][] result = new boolean[input.length + 1][total + 1];
+
+        for(int i = 0; i <= input.length; i++) {
+            result[i][0] = true;
+        }
+
+        for(int i = 1; i <= input.length; i++) {
+            for(int j = 1; j <= total; j++) {
+                if(j - input[i - 1] > 0) {
+                    result[i][j] = result[i -1][j] || result[i - 1][j - input[i -1]];
+                } else {
+                    result[i][j] = result[i - 1][j];
+                }
+            }
+        }
+        return result[input.length][total];
+    }
+
     public static void main(String[] args) {
         DPSolution objDP = new DPSolution();
         int arr[] = new int[]{2,3,1,1,4};
-        System.out.println(objDP.minJumpDP(arr));
+        System.out.println(objDP.subSetSum(arr, 9));
 
 
     }
