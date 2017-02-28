@@ -12,6 +12,11 @@ public class ArraySolution {
 
     private static final int MAX = 10000;
 
+    /**
+    *Problem : Two sum problem
+    *Link :https://leetcode.com/problems/two-sum/
+    *Time Complexity : O(nlogn) for sorting
+    */
     public int pairSumX(int[] input, int match) {
         Arrays.sort(input);
         int leftIndex = 0;;
@@ -28,6 +33,11 @@ public class ArraySolution {
         return 0;
     }
 
+    /**
+    *Problem : Two sum problem
+    *Link :https://leetcode.com/problems/two-sum/
+    *Time Complexity : O(n) ; space Complexity : O(n)
+    */
     public void pairSumx2(int[] input, int match) {
 
 
@@ -41,6 +51,28 @@ public class ArraySolution {
             binMap[input[i]] = true;
         }
     }
+
+    /**
+    *Problem : Two sum problem -HashMap implementation
+    *Link :https://leetcode.com/problems/two-sum/
+    *Time Complexity : O(n) ; space Complexity : O(n)
+    */
+    public int[] twoSum(int[] input, int match) {
+       Map<Integer, Integer> map = new HashMap<>();
+       int[] result = new int[2];
+
+       for(int i = 0; i < input.length; i++) {
+           if(map.containsKey(input[i])) {
+               int index = map.get(input[i]);
+               result[0] = index;
+               result[1] = i;
+               break;
+           }else {
+               map.put(match - input[i], i);
+           }
+       }
+       return result;
+   }
 
     public int majorityElement1(int[] input) {
         Arrays.sort(input);
