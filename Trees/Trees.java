@@ -2,6 +2,19 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+Common Tricks working with Tree Problems:
+    1. Remember tree are recursive data structure
+    2. Every node is a root in it's own capactiy with child nodes as part of that Tree
+    3. Solve for base case and upto one level and see how it generalizes
+    4. DFS(inorder travesal) start building from leftmost leaf nodes
+    5. visualization is improtant in tree Problems
+    6. Level order travesal is very powerfull, if current size of queue , you can
+       you have all elements of that level so can modify according to Situation
+    7. Solve example and see how you can generalize that.
+    8. for recurrsion ,create a utility function and call that with update result data
+       structure for each call
+*/
 public class Trees {
     TreeNode root;
 
@@ -70,6 +83,11 @@ public class Trees {
         printLevelOrderTraversal(root);
     }
 
+    /**
+    Problem : Check if a node exit in BST
+    *Link :
+    *Time Complexity : O(Logn) in average case
+    */
     public TreeNode searchKey(TreeNode node, int key) {
         if(node == null  || node.val == key) {
             return root;
@@ -83,6 +101,12 @@ public class Trees {
         return null;
     }
 
+    /**
+    *Problem :find the diameter of given tree
+    *Link :
+    *Observation :  The key observation is left and right node to root is subtree
+    and they will generate maximum diamener on calling function to left and right node
+    */
     public void diameter() {
         System.out.println(diameter(root));
     }
@@ -98,6 +122,14 @@ public class Trees {
     public int max(int a, int b) {
         return a>= b ? a : b;
     }
+
+    /**
+    *Problem :find the height of the tree
+    *Link :
+    *Observation :  The key observation is left and right node to root is subtree
+    and they will generate maximum height on calling function to left and right node
+    and just add level root to find total height;
+    */
     public int height(TreeNode root) {
         if (root == null) return 0;
         int leftHeight = height(root.left);
@@ -105,11 +137,23 @@ public class Trees {
         return (1 + max(leftHeight, rightHeight));
     }
 
+    /**
+    *Problem :Count number of nodes in  Tree
+    *Link :
+    *Observation :  The key observation is left and right node to root is subtree
+    and they will generate node count  on calling function to left and right node
+    */
     public int size(TreeNode root) {
         if(root == null) return 0;
         return size(root.left) + size(root.right) + 1;
     }
 
+    /**
+    *Problem : To check if two tree are identicalTree
+    *Link :
+    *Observation : To have two tree identifical their root should be same and
+    considering both left and  right part if tree check if they are same.
+    */
     public boolean identicalTree(TreeNode t1, TreeNode t2) {
 
         //if both are empty then return
@@ -123,6 +167,10 @@ public class Trees {
     /**
     *Problem : Check if a tree is symmetric about it's center
     *Link :https://leetcode.com/problems/symmetric-tree/?tab=Description
+    *Observation : The idea is to think the problem as around center both the
+    trees are mirror images so now the problem is to check if two tree are mirror
+    which can be solved recuurisvley checking root value are root on (left, right)
+    and (right, left) pair
     */
     public boolean isSymmetric(TreeNode root) {
       if (root == null) return true;
@@ -192,6 +240,8 @@ public class Trees {
     /**
     *Problem : Find if a root to leaf path exit with given sum
     *Link: https://leetcode.com/problems/path-sum/?tab=Description
+    *Observation : Understand the constraint : Path with sum at leaf node so left and
+    right child will be null and root node at leaf level will hold the value
     */
     public boolean hasPathWithSum(TreeNode root, int sum) {
         if(root == null) return false;
@@ -210,7 +260,7 @@ public class Trees {
         TreeNode left = invertTree(root.left);
         TreeNode right = invertTree(root.right);
         root.left = right;
-        ro  ot.right = left;
+        root.right = left;
         return root;
     }
 
