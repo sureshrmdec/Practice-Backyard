@@ -74,12 +74,21 @@ public class ArraySolution {
        return result;
    }
 
+   /**
+   *Problem : Find the majority element which occurs more than (n/2) times
+   *Link: https://leetcode.com/problems/majority-element/
+   *Time Complexity : O(nlogn) ; space complexity : O(1)
+   */
     public int majorityElement1(int[] input) {
         Arrays.sort(input);
         if(input.length ==1) return input[0];
         return input[input.length/2];
     }
 
+    /**
+    *Problem : Find number in array which occured odd number of times
+    *Time Complexity : O(n) ; space complexity :O(n) for HashMap
+    */
     public int oddNumberOccurence1(int[] input) {
         HashMap<Integer, Integer> occurenceCount = new HashMap<Integer, Integer>();
         for(int value : input) {
@@ -98,6 +107,10 @@ public class ArraySolution {
         return -1;
     }
 
+    /**
+    *Problem : Find number in array which occured odd number of times
+    *Time Complexity : O(nLogn) ; O(1) space Complexity
+    */
     public int oddNumberOccurence2(int[] input) {
         Arrays.sort(input);
         int size = input.length;
@@ -119,6 +132,8 @@ public class ArraySolution {
     }
 
     /*
+    *Problem : find the missing number in range of 1...n
+    *Link: https://leetcode.com/problems/missing-number/
     Time complexity : O(n) but sum can be overflow so can substract from fixed
     number and perform the operation on that list
     */
@@ -132,6 +147,12 @@ public class ArraySolution {
         return neededSum - currentArraySum;
     }
 
+    /*
+    *Problem : find the missing number in range of 1...n
+    *Link: https://leetcode.com/problems/missing-number/
+    Time complexity : O(n) for scanning the input but execution time will be the
+    fastest because of bit manupulation.
+    */
     public int missingElement2(int[] input) {
         int size = input.length;
         int x1 =input[0];
@@ -146,26 +167,62 @@ public class ArraySolution {
         return (x1^x2);
     }
 
-    public int searchRotatedArray(int[] input, int match) {
-        int pivotIndex = -1;
-        int size = input.length;
-        for(int i =0; i < size-1; i++) {
+
+      /**
+      *Problem : search an element in rotated sorted array
+      *Link:https://leetcode.com/problems/search-in-rotated-sorted-array/
+      *Time Complexity : O(nlogn) and space Complexity : O(n)
+      */
+      public int searchRotatedArray(int[] input, int match) {
+         int pivotIndex = -1;
+         int size = input.length;
+         for(int i =0; i < size-1; i++) {
             if(input[i+1] < input[i]) {
                 pivotIndex = i;
             }
-        }
-        int result = -1;
-        int[] firstArray = Arrays.copyOfRange(input,0,pivotIndex+1);
-        int[] secondArray = Arrays.copyOfRange(input,pivotIndex+1,size);
+         }
+         int result = -1;
+         int[] firstArray = Arrays.copyOfRange(input,0,pivotIndex+1);
+         int[] secondArray = Arrays.copyOfRange(input,pivotIndex+1,size);
 
-        if(match >= firstArray[0] && match <= firstArray[firstArray.length-1]) {
+         if(match >= firstArray[0] && match <= firstArray[firstArray.length-1]) {
             result =  Arrays.binarySearch(firstArray, match);
-        }
-        result =  Arrays.binarySearch(secondArray, match);
-        return (result + pivotIndex + 1);
-    }
+         }
+         result =  Arrays.binarySearch(secondArray, match);
+         return (result + pivotIndex + 1);
+      }
 
-    /*
+      /**
+      *Problem : search an element in rotated sorted array
+      *Link:https://leetcode.com/problems/search-in-rotated-sorted-array/
+      *Time Complexity : O(nlogn) ; O(1) space Complexity
+      */
+      public int search(int[] A, int target) {
+         if (A.length == 0) return -1;
+         int lo = 0;
+         int hi = A.length - 1;
+         while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if (A[mid] == target) return mid;
+
+            if (A[lo] <= A[mid]) {
+               if (target >= A[lo] && target < A[mid]) {
+                  hi = mid - 1;
+               } else {
+                  lo = mid + 1;
+               }
+            } else {
+               if (target > A[mid] && target <= A[hi]) {
+                  lo = mid + 1;
+               } else {
+                  hi = mid - 1;
+               }
+            }
+         }
+         return A[lo] == target ? lo : -1;
+      }
+
+    /**
     *Problem : Reverse an array String
     *observation : Use two pointers to keep track of head and tail index
     *Pseudo Code:
