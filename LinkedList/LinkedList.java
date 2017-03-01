@@ -478,6 +478,41 @@ public class LinkedList {
         return dummyHead.next;
     }
 
+    /**
+    *Problem : Copy list with random pointers
+    *Link: https://leetcode.com/problems/copy-list-with-random-pointer/
+    *Time Complexity :O(n) ; space Complexity :O(n)
+    *Observation : create a copy of the linked list then start assigning the link
+    in another scan
+    */
+    public RandomListNode copyRandomList(RandomListNode head) {
+        RandomListNode originalHead = head, cloneHead = null;
+        Map<RandomListNode, RandomListNode> nodeMap = new HashMap<>();
+
+        while(originalHead != null) {
+            nodeMap.put(originalHead, new RandomListNode(originalHead.label));
+            originalHead = originalHead.next;
+        }
+
+        originalHead = head;
+        while(originalHead != null) {
+            cloneHead = nodeMap.get(originalHead);
+            cloneHead.next = nodeMap.get(originalHead.next);
+            cloneHead.random = nodeMap.get(originalHead.random);
+            originalHead = originalHead.next;
+        }
+        return (nodeMap.get(head));
+    }
+
+        /**
+     * Definition for singly-linked list with a random pointer.
+     * class RandomListNode {
+     *     int label;
+     *     RandomListNode next, random;
+     *     RandomListNode(int x) { this.label = x; }
+     * };
+     */
+
     public static void main(String[] args) {
 
         LinkedList llist = new LinkedList();
