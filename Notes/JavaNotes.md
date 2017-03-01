@@ -280,3 +280,42 @@ Junit Testing in java:
 
    Behaviour Driven test development : @Given @When @then high level script and then
    script to support the Behaviour
+
+Java Virtual Machine :
+    Garbage Collection :
+        A new keyword object will allocate memory in heap and if memory is full,GC
+        will try to attempt to free some memory ,if not able to do then memory overflow error
+        A heap memory is segmented into various generations , new object is put into eden space
+        if object survives garbage collection, it moves to survivor space and survive more long
+        engugh move to tenured generation. Fourth generation is called permanent pool holds
+        class defintion and string pool
+
+        GC works on mark and swipe algorithm which mark all object running in code as live and
+        keep traversing all the references and mark them live too. Then all objects marked as live
+        in heap are left and others are released ,during this process all threads will be stopped
+        called stop of world.
+
+        Compaction is process of moving object in different memory space and group objects together
+        to free space as much as it can.
+
+    Difference between Stack and Heap ?
+        Heap is a place where new contstructed object will be placed while stack is what
+        hold premitive values and all the reference assignment for a given code block.
+
+        You can specify JVM heap size using -Xmx512
+
+    Memory leaks in java ?
+    The objects which are isloted in memory and have active refernce so it can't be GC
+
+    JVM have classLoader which will load any bytecode .class file to JVM memory then JVM ensure
+    that byte code is valid. JIT complier dynamicly convert byte code into native instruction so
+    interpreting byte code is not necessary.
+
+    Finalize method is part of GC and executed before dumping an object to tie off any loose end.
+    to detach any resource gc object has been associated with.
+
+    Shutdown hooks are similar to finalize method which allows to provide references to thread object
+    you can do using System.getRuntime().addShutDownHook(new Thread())
+
+    native method writtern with C/C++ code needs to be registered with jvm to support platform
+    specific operaitons.
