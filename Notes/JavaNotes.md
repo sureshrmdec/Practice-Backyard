@@ -221,3 +221,62 @@ How type variance affects generics ?
 Co-variant : an array of type T can hold data of type T or subtype of t
 java genereics are type erasure at run time
 What does reified mean ?
+    Compile time ,java perform type erasure from Generics
+
+Is it possible for premitive type to throw null Pointer Exception ?
+    Yes, they can be unboxing (Integer to int) at run time lead to null value
+
+Use of annotation in java - junit @Before @Test @after
+@Override
+
+Exception handling :
+Throwable is the main class in exception hirarchy with exception and error as two sub
+classes ,exception are divided into run time exception and all other as checked exception
+
+for checked  exception, your method defintion should mention what exception it can throw
+and calling function should handle the exception , also checked exception uses
+try -cache finally
+
+Why do fields that are private also needs to be marked as final to make them immutable ?
+class with final and all fields private can still be mutated using java reflection API.
+
+LinkedHashMap has all the properties of hashMap but also ensures that insertion order
+is maintained
+
+Why was HashMap introduced when hashtable was available ?
+    HashTable is very slow as it's syncronized also it was introduced way before
+    collection framewrok and work as legacy class
+
+Junit Testing in java:
+    Annotation used are @beforeClass @before @Test @after @afterClass
+    Junit test suite class is similar to java class where each test method is an
+    new instance and can access class fields and applied with before method functionality
+
+    @Ignore : will ignore the given test case
+    Best practices for Junit Testing:
+    AssertClass : assertEquals(two object are equal by ojbect equal nature)
+                  assertTrue , assertFalse, assertArrayEquals, assertNotNull
+   assertTrue(string msg- failure explanation, boolean condition)
+   if assertion don't hold true, then either exception should be expected or caught
+   or it will fail the test case.
+
+   Expecting exception : @Test(expected = NoSuchFileException.class)
+   QTest(long timeout) -> to check if testcase is finished in given time
+
+   @RunsWith(Parameterized.class) - > use the parameter passed as constructor or
+   read from file and use to test various unit test in test suite
+
+   Eleminating dependencies with Mock (Integration Testing)
+      To break down the dependency between class and outside world,two main things
+      are dependency injection and mocking
+
+      A stub is a controllable replacement for an existing dependency (or collaborator)
+      in the system. By using a stub, you can test your code without dealing with the dependency directly.
+
+      A mock object is a fake object in the system that decides whether the unit test
+      has passed or failed. It does so by verifying whether the object under test
+      interacted as expected with the fake object.
+      (http://stackoverflow.com/questions/31890991/java-how-to-use-stubs-in-junit)
+
+   Behaviour Driven test development : @Given @When @then high level script and then
+   script to support the Behaviour
