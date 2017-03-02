@@ -359,3 +359,40 @@ Design Patterns:  The main focus is code reuse ,extensibility and solid foundati
       FlyWeight Design Pattern:
       it can be useful in situtations where you have several objects and many may represent same value
       In this case it's good to share the values as long as they are immutable
+
+      The binary tree leaf nodes all point to same null nodes instead of having every leaf node having
+      individual null object using new.
+
+   What is singelton desing pattern in java ?
+   It allows only one instance to be created for given class. That ensures only point of entry
+   to third party services such as database or webservices
+
+   Lazy intialization : the instance will be created when first needed then it will return the same reference.
+
+
+
+Concurrency in Java :
+   You can create a thread either using thread class or by using runnable interface.The runnable
+   interface don't have throws decalartion so you need to add try - catch block while callable interface
+   in java do have throws declaration.
+
+   What is the difference between thread vs Executor ?
+   Thread creation is an expensive operation and OS may limit number of threads at time so thread pool
+   is strategy where after a set of threads ,it's ensures to reuse threads which are completed their previous code
+
+   Final Executor executor = Executors.newCachedThreadPool();
+   executor.execute(new ThreadPrinter());
+
+   A Callable needs to implement call() method while a Runnable needs to implement run() method.
+   A Callable can return a value but a Runnable cannot.
+   A Callable can throw checked exception but a Runnable cannot.
+   A Callable can be used with ExecutorService#invokeXXX methods but a Runnable cannot be.
+
+   there can never be a outer static class, but you can have inner static class which provides
+   a class implementation similar to main level class.A final class can't be subclassed.
+
+   How do you test concurrent code ?
+   CountdownLatch is an syncronization aid that will help one or more threads to wait until
+   set of operations performed in other threads are completed
+
+   How do you manage shared state between threads ?
