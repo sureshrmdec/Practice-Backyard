@@ -319,3 +319,43 @@ Java Virtual Machine :
 
     native method writtern with C/C++ code needs to be registered with jvm to support platform
     specific operaitons.
+
+
+Design Patterns:  The main focus is code reuse ,extensibility and solid foundation for future scale.
+    Builder Design Patterns:
+    Creating an object with many fields and with some fields being optinal can end up having
+    many constructors
+    If you get rid of constructor and allow setter to build empty object that break the complete
+    defintion of Pet object(which require to have name, parent animal and othe features)
+
+    Builder pattern, you create a companion object called builder
+    final Pet.Builder builder = new Pet.Builder();
+    final Pet = builder.set().set().set().set().build();
+
+    Strategy Pattern :
+    Strategy patterns enables you to change the specific implemenation of algorithm without
+    rewriting the algorithm completly.you can swap implemenation in run time. startegy pattern
+    is used in conjuection with dependenct injection  to swap production code with test code
+
+    Simple Example : You pass List list as argument what you are passing is interface but
+    when you try to use it you use either ArratList<> or LinkedList<> so you can swap the implementation
+    at run time based on the need.
+    Log4j : java logging library
+    Using strategy pattern allows you to differn implemenation until running time.
+
+   Template Design Pattern:
+      Used to defer and delegate sum part of algo or all steps to subclass ,Defining
+      common steps in main class and specific implemenation in child classes
+
+      Using a method in parent class but defining functionality in child class
+
+   Decorator pattern :
+      Allows you to change or configure the functionality of specific object - how to model
+      two different sandwiches from same set of ingridents
+      Decorator pattern achieves a single objective of dynamically adding responsibility to object
+      Create different classes extending abstract class such as FlightSeat() ,Now adding
+      each feature such as frontSet object, Wifi using extedning the flighSeat() class
+
+      FlyWeight Design Pattern:
+      it can be useful in situtations where you have several objects and many may represent same value
+      In this case it's good to share the values as long as they are immutable
