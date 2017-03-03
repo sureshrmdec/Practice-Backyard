@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-
+import java.util.Stack;
 
 /**
 Common Tricks to solve Array Problems:
@@ -493,7 +493,7 @@ public class ArraySolution {
     *Link: https://leetcode.com/problems/reverse-integer/
     Time Complexity : O(n); space Complexity : O(1)
     */
-   public int reverseInteger(int n) {
+    public int reverseInteger(int n) {
       if(n == 0) return 0;
       boolean flag = false;
       long result = 0;
@@ -511,7 +511,7 @@ public class ArraySolution {
          result =  0 - result;
      }
      if( result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) return 0;
-     return result;
+     return (int)result;
    }
 
     /**
@@ -615,10 +615,10 @@ public class ArraySolution {
         return ans;
     }
     /**
-    *Problem : Merge overlapping intervals
-    *Link: https://leetcode.com/problems/merge-intervals/
-    *Time Complexity : o(nlogn) to sort the interval based on start time
-    */
+   //  *Problem : Merge overlapping intervals
+   //  *Link: https://leetcode.com/problems/merge-intervals/
+   //  *Time Complexity : o(nlogn) to sort the interval based on start time
+   //  */
     public List<Interval> merge(List<Interval> intervals) {
         if(intervals.size() < 2) return intervals;
         intervals.sort((l1, l2) -> Integer.compare(l1.start, l2.start));
@@ -714,9 +714,87 @@ public class ArraySolution {
         return (int) sum * sign;
     }
 
+    /**
+    *Problem : Maximum sum rectangle with 1's in matrix
+    *Link: https://leetcode.com/problems/maximal-rectangle/
+    *Observation: Each row form "find highest  area in historgram" problem that we loop over
+    * all rows and acculmate values across all rows and return the max area
+    *Time Complexity : O(col* row); space Complexity :O(col)
+    */
+    public int MaximumRectangularSubmatrixOf1s(int[][] input) {
+        int[] temp = new int[input[0].length];
+        int maxArea = 0;
+        int area = 0;
+        for(int i = 0; i < input.length; i++) {
+            for(int j = 0; j < temp.length; j++) {
+                if(input[i][j] == 0) temp[j] = 0;
+                else temp[j] += input[i][j];
+            }
+            area  = maxHistrogram(temp);
+            maxArea = area > maxArea ? area : maxArea;
+        }
+        return maxArea;
+    }
+
+    /**
+    *Problem : Find the maximum area in histrogram
+    *Link :https://github.com/mission-peace/interview/blob/master/src/com/interview/stackqueue/MaximumHistogram.java
+    *Video link https://youtu.be/ZmnqCZp9bBs
+    */
+    public int maxHistrogram(int[] input) {
+        Stack<Integer> stack = new Stack<>();
+        int maxArea = 0;
+        int area = 0;
+        int i;
+        for(i = 0; i <input.length;) {
+            if(stack.isEmpty() || input[stack.peek()] <= input[i]) {
+                stack.push(i++);
+            } else {
+                int top = stack.pop();
+                //if stack is empty means everything till i has to be greater or
+                // equal to input[top] so get area by input[top]*i;
+                if(stack.isEmpty()) {
+                    area = input[top]*i;
+                }
+                //if stack is not empty then everything from i-1 to stack.peek() +1
+                //has to be greater or equal to input[top]
+                else {
+                    area = input[top]*(i - stack.peek() -1);
+                }
+                if(area > maxArea) maxArea = area;
+            }
+        }
+
+        while(!stack.isEmpty()){
+            int top = stack.pop();
+            //if stack is empty means everything till i has to be
+            //greater or equal to input[top] so get area by
+            //input[top] * i;
+            if(stack.isEmpty()){
+                area = input[top] * i;
+            }
+            //if stack is not empty then everything from i-1 to input.peek() + 1
+            //has to be greater or equal to input[top]
+            //so area = input[top]*(i - stack.peek() - 1);
+            else{
+                area = input[top] * (i - stack.peek() - 1);
+            }
+        if(area > maxArea){
+                maxArea = area;
+            }
+        }
+        return maxArea;
+    }
+
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
-        int[] input = {4,5,6,7,1,2,3};
-        System.out.println(objArraySol.sqrtNumberBinarySearch(16));
+        int input1[][] = {{1,1,1,0},
+                         {1,1,1,1},
+                         {0,1,1,0},
+                         {0,1,1,1},
+                         {1,0,0,1},
+                         {1,1,1,1}};
+         int input[] = {2,2,2,6,1,5,4,2,2,2,2};
+        System.out.println(objArraySol.MaximumRectangularSubmatrixOf1s(input1));
     }
 }
