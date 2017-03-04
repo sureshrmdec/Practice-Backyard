@@ -308,6 +308,28 @@ public class Trees {
         inorderDFSUtil(res, root.left, level + 1);
         inorderDFSUtil(res, root.right, level + 1);
     }
+
+    /**
+    *Problem : Find sum of all left leafs in the tree
+    *Link: https://leetcode.com/problems/sum-of-left-leaves/
+    * Time Complexity : O(n) - worst case you will traverse all the nodes; space
+    * complexity : O(h) : height of tree
+    */
+
+    public int sumOfLeftLeaves(TreeNode root) {
+        if(root == null ||(root.left == null && root.right ==null)) return 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        int sum = 0;
+        while(!queue.isEmpty()) {
+            TreeNode temp = queue.poll();
+            if(temp.left != null && temp.left.left == null && temp.left.right == null) sum += temp.left.val;
+            if(temp.left != null) queue.offer(temp.left);
+            if(temp.right != null) queue.offer(temp.right);
+        }
+       return sum;
+    }
+    
     public static void main(String[] args) {
         Trees tree = new Trees();
         tree.root = new TreeNode(5);

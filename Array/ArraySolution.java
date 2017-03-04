@@ -786,6 +786,29 @@ public class ArraySolution {
         return maxArea;
     }
 
+
+   /**
+   *Problem : find the area of overlapping rectangle while removing common area
+   *Link: https://leetcode.com/problems/rectangle-area/
+   *Time complexity : O(1) ; space complexity : O(1)
+   *Logic : find area of both the rectangle and substract the common one
+   */
+   public int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
+      int areaA = (C - A) * (D - B);
+      int areaB = (G - E) * (H - F);
+
+      int left = Math.max(A, E);
+      int right = Math.min(G, C);
+      int bottom = Math.max(F, B);
+      int top = Math.min(D,H);
+
+      int overlap = 0;
+      if(right > left && top > bottom) {
+         overlap = (right - left) * (top - bottom);
+      }
+      return areaA + areaB - overlap;
+   }
+
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
