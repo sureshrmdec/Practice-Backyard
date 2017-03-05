@@ -28,6 +28,28 @@ public class MatrixSol {
             System.out.println(e);
         }
     }
+
+    /**
+    *Problem : search a row and column sorted matrix
+    *Link: https://leetcode.com/problems/search-a-2d-matrix-ii/
+    *Time Complexity :O (m + n)
+    */
+
+    public boolean searchMatrix(int[][] matrix, int target) {
+
+    if(matrix == null || matrix.length < 1 || matrix[0].length < 1) return false;
+    int rowLimit = matrix.length - 1;
+    int col = matrix[0].length - 1;
+
+    int row = 0;
+    while(row <= rowLimit && col >= 0) {
+        if(matrix[row][col] == target) return true;
+        else if (matrix[row][col] > target) col--;
+        else if(matrix[row][col] < target) row++;
+    }
+    return false;
+    }
+
     public static void main(String[] args) {
         MatrixSol objMatrix = new MatrixSol();
         int[][] input = {{1,2,3},
