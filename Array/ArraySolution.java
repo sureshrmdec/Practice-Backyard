@@ -882,6 +882,20 @@ public class ArraySolution {
       return (n1 == n2) ? String.valueOf(n1) : String.format("%d->%d", n1, n2);
    }
 
+   /**
+   *Problem : Given positive integer ,return excel sheet column number
+   *Link :https://leetcode.com/problems/excel-sheet-column-title/
+   */
+   public String convertToTitle(int n) {
+        StringBuilder result = new StringBuilder();
+        while(n > 0) {
+            n--;
+            result.insert(0, (char)('A' + n % 26));
+            n /=26;
+        }
+        return result.toString();
+    }
+    
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
