@@ -274,6 +274,30 @@ public class DPSolution {
         return maxResult;
     }
 
+    /**
+    *Problem : find maximum sum subarray in given array
+    *Link:https://leetcode.com/problems/maximum-subarray/
+    *Time Complexity : O(n) ; space Complexity :O(n)
+    */
+    public int maxSubArray(int[] input) {
+        int size = input.length;
+        int[] result = new int[size];
+
+        for(int i = 0; i < size; i++) {
+            result[i] = input[i];
+        }
+        for(int i = 1; i < size; i++) {
+            result[i] = Math.max(result[i], result[i-1] + result[i]);
+        }
+        int maxSum = result[0];
+        for(int i = 1; i < size; i++) {
+            if(result[i] > maxSum) {
+                maxSum = result[i];
+            }
+        }
+        return maxSum;
+    }
+    
     public static void main(String[] args) {
         DPSolution objDP = new DPSolution();
         int arr[] = new int[]{2,3,1,1,4};
