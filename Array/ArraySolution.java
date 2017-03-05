@@ -913,6 +913,39 @@ public class ArraySolution {
       }
       return low;
    }
+
+   /***
+   *Problem : rearrange the array to form the highest number
+   *Link:https://leetcode.com/problems/largest-number/
+   *Time Complexity : O(nlogn); space : O(n)
+   */
+   public String largestNumber(int[] nums) {
+        if(nums == null || nums.length < 1) return null;
+
+        int size = nums.length;
+        String[] input = new String[size];
+
+        for(int i = 0; i < size; i++) {
+            input[i] = Integer.toString(nums[i]);
+        }
+
+        Comparator digitComp = new Comparator<String>() {
+
+          @Override
+          public int compare(String o1, String o2) {
+              return (o2 + o1).compareTo(o1 + o2);
+          }
+        };
+        Arrays.sort(input, digitComp);
+
+        if(input[0].charAt(0) == '0') return "0";
+
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < size; i++) sb.append(input[i]);
+
+        return sb.toString();
+   }
+
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
