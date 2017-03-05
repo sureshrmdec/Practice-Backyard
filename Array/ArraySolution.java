@@ -619,25 +619,25 @@ public class ArraySolution {
    //  *Link: https://leetcode.com/problems/merge-intervals/
    //  *Time Complexity : o(nlogn) to sort the interval based on start time
    //  */
-    public List<Interval> merge(List<Interval> intervals) {
-        if(intervals.size() < 2) return intervals;
-        intervals.sort((l1, l2) -> Integer.compare(l1.start, l2.start));
-        List<Interval> result = new LinkedList<>();
-        int start = intervals.get(0).start;
-        int end = intervals.get(0).end;
-
-        for(Interval e : intervals) {
-            if(e.start <= end) {
-                end = Math.max(end, e.end);
-            }else {
-                result.add(new Interval(start, end));
-                start = e.start;
-                end = e.end;
-            }
-        }
-        result.add(new Interval(start, end));
-        return result;
-    }
+   //  public List<Interval> merge(List<Interval> intervals) {
+   //      if(intervals.size() < 2) return intervals;
+   //      intervals.sort((l1, l2) -> Integer.compare(l1.start, l2.start));
+   //      List<Interval> result = new LinkedList<>();
+   //      int start = intervals.get(0).start;
+   //      int end = intervals.get(0).end;
+    //
+   //      for(Interval e : intervals) {
+   //          if(e.start <= end) {
+   //              end = Math.max(end, e.end);
+   //          }else {
+   //              result.add(new Interval(start, end));
+   //              start = e.start;
+   //              end = e.end;
+   //          }
+   //      }
+   //      result.add(new Interval(start, end));
+   //      return result;
+   //  }
 
     /**
     *Problem : Check if two string is valid anagram
@@ -808,6 +808,45 @@ public class ArraySolution {
       }
       return areaA + areaB - overlap;
    }
+
+    /**
+    *Problem : convert fraction into string with lowest form
+    *Link:https://leetcode.com/problems/fraction-to-recurring-decimal/
+    */
+    public String fractionToDecimal(int num, int den) {
+       if (num == 0) return "0";
+       StringBuilder sb = new StringBuilder();
+
+       //check for '+'/'-'
+       sb.append((num > 0 ^ den > 0) ? "-" : "");
+
+       long n = Math.abs((long) num);
+       long d = Math.abs((long) den);
+       //check for main value
+       sb.append(n/d);
+       n %= d;
+
+       if(n == 0) return sb.toString();
+
+       //fractional part
+       sb.append(".");
+       HashMap<Long, Integer> map = new HashMap<Long, Integer>();
+       map.put(n, sb.length());
+       while(n != 0) {
+           n = n * 10;
+           sb.append(n/d);
+           n %= d;
+           if(map.containsKey(n)) {
+               int index = map.get(n);
+               sb.insert(index, "(");
+               sb.append(")");
+               break;
+           }
+           else map.put(n, sb.length());
+       }
+       return sb.toString();
+    }
+
 
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
