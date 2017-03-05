@@ -249,6 +249,31 @@ public class DPSolution {
         return result[input.length][total];
     }
 
+    /**
+    *Problem : find maximum product subarray in given array
+    *Link: https://leetcode.com/problems/maximum-product-subarray
+    *Time complexity : O(n); space complexity : O(1)
+    */
+    public int maxProduct(int[] nums) {
+
+        if(nums == null || nums.length < 1) return -1;
+        int maxLastIndex = nums[0];
+        int minLastIndex  = nums[0];
+        int maxGivenIndex, minGivenIndex;
+
+        int maxResult = nums[0];
+        for(int i = 1; i < nums.length; i++) {
+            int e = nums[i];
+            maxGivenIndex = Math.max(Math.max(maxLastIndex * e, minLastIndex * e), e);
+            minGivenIndex = Math.min(Math.min(maxLastIndex * e, minLastIndex * e), e);
+
+            maxResult = Math.max(maxResult, maxGivenIndex);
+            maxLastIndex = maxGivenIndex;
+            minLastIndex = minGivenIndex;
+        }
+        return maxResult;
+    }
+
     public static void main(String[] args) {
         DPSolution objDP = new DPSolution();
         int arr[] = new int[]{2,3,1,1,4};
