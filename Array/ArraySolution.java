@@ -895,7 +895,24 @@ public class ArraySolution {
         }
         return result.toString();
     }
-    
+
+    /**
+    *Problem : find the peak element in array which is greater than it's neighbour
+    *Link: https://leetcode.com/problems/find-peak-element/
+    *time complexity : O(logn) for binary search
+    */
+    public int findPeakElement(int[] nums) {
+      if(nums == null || nums.length < 1) return -1;
+      int low = 0;
+      int high = nums.length -1;
+
+      while(low < high) {
+          int mid = low + (high - low)/2;
+          if(nums[mid] < nums[mid + 1]) low = mid + 1;
+          else high = mid;
+      }
+      return low;
+   }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
