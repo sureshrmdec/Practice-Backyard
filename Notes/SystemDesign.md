@@ -266,7 +266,7 @@ Describe how you would design this system.
         hourly basis
 
     3. Draw Major Components:
-        
+            
 
 
 

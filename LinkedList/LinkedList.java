@@ -532,6 +532,18 @@ public class LinkedList {
         return head;
     }
 
+
+    /**
+    *Problem : Delete duplicate from  sorted linked List
+    *Link :https://leetcode.com/problems/remove-duplicates-from-sorted-list/
+    *time Complexity : O(n) ; space complexity : O(n) : stack space     
+    */
+    public ListNode deleteDuplicates(ListNode head) {
+      if(head == null || head.next == null) return head;
+      head.next = deleteDuplicates(head.next);
+      return head = head.val == head.next.val ? head.next : head;
+   }
+
     public static void main(String[] args) {
 
         LinkedList llist = new LinkedList();
