@@ -1064,6 +1064,26 @@ public class ArraySolution {
       return result;
    }
 
+   /**
+   *Problem: Plus one to digit represented as ArraySolution
+   *Link: https://leetcode.com/problems/plus-one/
+   *Time Complexity : O(n) in worst case , space Complexity : O(n)
+   */
+   public int[] plusOne(int[] digit) {
+      int size = digit.length;
+
+      for(int i = size - 1; i >= 0; i--) {
+          if(digit[i] == 9) digit[i] = 0;
+         else {
+             digit[i]++;
+          return digit;
+         }
+      }
+      int[] result = new int[size + 1];
+      result[0] = 1;
+      return result;
+      }
+
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
