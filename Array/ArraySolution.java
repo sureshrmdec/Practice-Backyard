@@ -968,6 +968,15 @@ public class ArraySolution {
         return false;
     }
 
+   /**
+   *Problem : Add Digits and return until it has only one digit left
+   *Link: https://leetcode.com/problems/add-digits/?
+   *time Compleoxity :O (1) ; space Compleoxity : O(1)
+   */
+   public int addDigits(int num) {
+        return num = num % 9 == 0 ? 9 : num % 9;
+   }
+
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
