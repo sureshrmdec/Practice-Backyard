@@ -237,4 +237,26 @@ public class StackSol {
 		}
 		return S.pop();
     }
+
+    /**
+    *Problem : find the next greater element for a subset of array in larger ArrayList
+    *Link :https://leetcode.com/problems/next-greater-element-i/
+    *Time Complexity :  O(n) ; space Complexity :O(n)
+    */
+    public int[] nextGreaterElement(int[] findNums, int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        Stack<Integer> stack = new Stack<>();
+
+        for(int n : nums) {
+            while(!stack.isEmpty() && stack.peek() < n ) {
+                map.put(stack.pop(), n);
+            }
+            stack.push(n);
+        }
+        for(int i = 0; i < findNums.length; i++) {
+            findNums[i] = map.getOrDefault(findNums[i], -1);
+        }
+        return findNums;
+
+    }
 }
