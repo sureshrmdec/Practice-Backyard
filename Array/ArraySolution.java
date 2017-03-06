@@ -1010,6 +1010,34 @@ public class ArraySolution {
        return r;
     }
 
+    /**
+    *Problem : Moving average from data stream
+    *Link: https://leetcode.com/problems/moving-average-from-data-stream/
+    *Time Complexity : O(n) ;space Complexity :O(n)
+    *Check leetcode other solution also which provide better insight on array pointer 
+    */
+    class MovingAverage {
+    Queue<Integer> queue;
+    double sum;
+    int size;
+    /** Initialize your data structure here. */
+    public MovingAverage(int size) {
+        queue = new LinkedList<Integer>();
+        sum = 0;
+        this.size = size;
+
+    }
+
+    public double next(int val) {
+        if(queue.size() == size) {
+            sum -= queue.poll();
+        }
+            queue.offer(val);
+            sum += val;
+
+            return sum / queue.size();
+    }
+    }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
