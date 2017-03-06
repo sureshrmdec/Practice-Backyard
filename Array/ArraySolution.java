@@ -946,6 +946,28 @@ public class ArraySolution {
         return sb.toString();
    }
 
+    /**
+    *Problem : find a given number is happy
+    *Link: https://leetcode.com/problems/happy-number/
+    *Time Complexity : O(digitLength); spaceComplexity : O(n)
+    */
+    public boolean isHappy(int n) {
+        HashSet<Integer> set = new HashSet<>();
+        int squareSum;
+        while(set.add(n)) {
+            squareSum = 0;
+            while(n > 0) {
+                int remainder = n % 10;
+                squareSum += remainder * remainder;
+                n /= 10;
+            }
+
+            if(squareSum == 1) return true;
+            else n = squareSum;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
