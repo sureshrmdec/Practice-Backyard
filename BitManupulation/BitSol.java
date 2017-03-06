@@ -23,6 +23,22 @@ public class BitSol {
         }
         return bitCount;
     }
+
+    /**
+    *Problem : Hamming distance between two numbers
+    *Link :https://leetcode.com/problems/hamming-distance/?
+    *Time Complexity : O(n); space Complexity : O(1)
+    */
+    public int hammingDistance(int x, int y) {
+        int res = x ^ y;
+        int counter = 0;
+        while(res > 0)  {
+            counter++;
+            res = res & (res -1);
+        }
+        return counter;
+    }
+
     public static void main(String[] args) {
         BitSol objBitSol = new BitSol();
         System.out.println(objBitSol.HammingWeight(7));
