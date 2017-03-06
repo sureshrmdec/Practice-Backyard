@@ -1014,7 +1014,7 @@ public class ArraySolution {
     *Problem : Moving average from data stream
     *Link: https://leetcode.com/problems/moving-average-from-data-stream/
     *Time Complexity : O(n) ;space Complexity :O(n)
-    *Check leetcode other solution also which provide better insight on array pointer 
+    *Check leetcode other solution also which provide better insight on array pointer
     */
     class MovingAverage {
     Queue<Integer> queue;
@@ -1038,6 +1038,32 @@ public class ArraySolution {
             return sum / queue.size();
     }
     }
+
+    /**
+    *Problem : max consecutive ones
+    *Link : https://leetcode.com/problems/max-consecutive-ones/
+    */
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int maxHere = 0, max = 0;
+
+        for(int n : nums) {
+            max = Math.max(max, maxHere = n == 0 ? 0 : maxHere + 1);
+        }
+        return max;
+   }
+
+   public int findMaxConsecutiveOnes2(int[] nums) {
+      int count = 0, result = 0;
+
+      for(int i = 0; i < nums.length; i++) {
+         if(nums[i] == 1) {
+            count++;
+            result =  Math.max(count, result);
+         } else count = 0;
+      }
+      return result;
+   }
+
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
