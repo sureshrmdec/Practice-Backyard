@@ -513,6 +513,25 @@ public class LinkedList {
      * };
      */
 
+    /**
+    *Problem : group a singly linked list into odd and even linked ListNode
+    *Link :https://leetcode.com/problems/odd-even-linked-list/
+    *Time Complexity : O(n) - traversing the list, space Complexity : O(1)
+    */
+    public ListNode oddEvenList(ListNode head) {
+        if(head == null || head.next == null) return head;
+        ListNode odd = head, even = head.next, evenHead = head.next;
+
+        while(even != null && even.next != null) {
+            odd.next = even.next;
+            odd = odd.next;
+            even.next = odd.next;
+            even = even.next;
+        }
+        odd.next = evenHead;
+        return head;
+    }
+
     public static void main(String[] args) {
 
         LinkedList llist = new LinkedList();
