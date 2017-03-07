@@ -123,6 +123,54 @@ Key Concepts :
             sum += count
         emit(word, sum)
         */
+Additonal Nots on scalability :
+    1. Clones : Every server stores the same codebase and no application server holds data such as
+    user profiles and sessions
+
+    Q: What is session inconsistency ?
+    A: If individual application server is holding session data ,then with new request, it maye
+    end up to new server and it may ask to user to sign up again
+
+    Session should be store in centeralized server/persistent cache on different server not on
+    any of the application server.
+
+    if your first bottleneck is over- which is handling large number of concurrent request then
+    another bottleneck for heavy data writing applications is database - if you choose to have
+    relational DB, then create a master slave replication (read from slaves and write to master)
+    -denormalization, sharing,SQL Tuning
+
+    Another way is,denormalization to be done from begining and reduce number of joins query.
+    Couch or MongoDB helps to perform join in application code than DB level.
+
+    Cache resides in buffering layer between application layer and data storage
+    Query Caching(Cache query and result in cache but in some cases query is not request
+    more than one) vs Object Caching(keep object instance and all updates to object are added
+    to cache such as you comment on post)
+
+    Asynchronous Behaviour : all the heavy work is done in advance such as cron job
+    and then results are rendered
+
+    Behind the scene update the dashboard or allow user to explore the website but
+    inform them when job is processed
+
+    Database sharding :
+        Federated Model : data is stored in multiple server and you search all and
+        combine and return the result
+        Sharding is a process of creating a group of server on cheap linux machines
+
+        Advantage :
+        High
+
+
+
+    Q: What is the difference between web server and application server
+    A: Webserver is designed to serve http content, App server can server http and
+    other protocol content. In typical setting webserver will return static content
+    while application server will return dynamic content
+
+    Application Server exposes business logic and process
+    Web server, serve content using http protocol
+
 
 Example 1:
     Given a list of millions of documents, how would you find all documents that contain a list of words? The words
@@ -263,11 +311,24 @@ Describe how you would design this system.
 
     2. Define Assumptions :
         Precision is supported with some error such as Updates on preodic basis such as
-        hourly basis
+        hourly basis and updates are more important for pouplare items compared to less popular items
+
 
     3. Draw Major Components:
-            
+        Frontend - Backend Server -(Analytics Engine) - Database
+        Performing sales calculation at each hour will be very expensive why not stores details in DB
+        either through proper table configuration or performing PL/SQL block in database to Calculate
+        total sales and top selling item in each category
 
+        Create a product table with each product id have sales column for monday ,tuesday and other
+        then create a table that provide product id to catalog mapping
+
+        Do a batch DB write than writing with every purchase
+
+        Joins are expensive
+
+
+Example 7: Design a Personal finance Manager
 
 
 
