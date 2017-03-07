@@ -1084,6 +1084,29 @@ public class ArraySolution {
       return result;
       }
 
+    /**
+    *Problem : generate valid peranthesis permutation for a give number
+    *Link: https://leetcode.com/problems/generate-parentheses/?
+    */
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        generateUtility(result, "", 0, 0, n);
+        return result;
+    }
+
+    public void generateUtility(List<String> result, String str, int open, int close, int max) {
+        if(str.length() == max * 2) {
+            result.add(str);
+            return;
+        }
+        if(open < max) {
+            generateUtility(result, str+"(", open + 1, close, max);
+         }
+        if(close < open) {
+            generateUtility(result, str +")", open, close + 1, max);
+        }
+
+    }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
