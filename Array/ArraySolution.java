@@ -1107,6 +1107,36 @@ public class ArraySolution {
         }
 
     }
+
+    /**
+    *Problem :
+    *Link :
+    *Observation : you have to fill entries vertically and then go again so in each
+    while loop iteration, you go through one down and one up and with each iteration
+    through stringbuilder ojbect you are keep filling all rows and col till that point
+    and when loop out over all the character in string then add append each row,
+    Remember with each iteration you will filling both rows and col
+    */
+   public String convert(String s, int numRows) {
+        char[] c = s.toCharArray();
+        StringBuffer[] sb = new StringBuffer[numRows];
+
+        for(int i = 0; i < sb.length; i++) {
+            sb[i] = new StringBuffer();
+        }
+
+        int i = 0;
+        int len = c.length;
+        while(i < len) {
+            for(int idx = 0; idx < numRows && i < len; idx++) sb[idx].append(c[i++]);
+            for(int idx = numRows -2; idx >=1 && i < len; idx--) sb[idx].append(c[i++]);
+        }
+        for(int idx = 1; idx < sb.length; idx++) {
+            sb[0].append(sb[idx]);
+        }
+        return sb[0].toString();
+    }
+
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
