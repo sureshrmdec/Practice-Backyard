@@ -328,12 +328,40 @@ Describe how you would design this system.
         Joins are expensive
 
 
-Example 7: Design a Personal finance Manager
+Example 7: Design a system to download videos from Youtube ?
+    1. Define scope and use case for system
+    A:
+        1.Will it be a web app where user can enter the url and downloadere
+        2.Will there be a support for Channel video downloads
+        3.Will we provide different format downloads
+        4.Will we have feature to user to create profile and have history
+        5. Are we suppose to have all youtube videos
+    So user will enter a query either a signle video/channel then able to
+    download in different formats and have feature to create profile
+
+    Assumptions:
+    1. System is holding data for specific category
+    2. Maximum number of users - 100
 
 
+    3. Draw the major component
+       Front end application - > Server - > Database
+       Q: How we get data from Youtube and store in DB ?
+       A: Typical Youtube DB is MySQL but we only need to maintain URL to video mapping
+       so Dynamo DB will be a great fit. We will crawl the data at regular interval to
+       fetch newly added data to our DB
 
+       How it's done is reverse engineering the youtube url and determine the
+       location of FLV file.
 
-
+    4. Describe the bottleneck
+    A:
+        1. When there are too many request coming in.
+        A: We can create a set of application server connected to Load balancer to
+        distribute the traffic.
+        2. How to scale the solutions in storage ?
+        A: We can first you the cache popular videos so it will reduce DB requests
+           We can search data using hash in Dynamo DB which is a key value piar.
 
 
 
