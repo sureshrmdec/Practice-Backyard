@@ -365,7 +365,32 @@ Example 7: Design a system to download videos from Youtube ?
 
 
 
+Example : How to design a online video streaming website ?
+    1. Define the scope and use case of system
+        1.A catalog for videos // Core functionality
+        2.User profiles        // Core functionality
 
+    2. Assumptions:
+        1. Number of user request we can handle :
+        2. Memory and computing constraint
+
+    3. Draw the major component:
+        1. Front end
+        2. Application layer: user authentication, session management, other computation
+        3. Data Layer: MYSQL :
+            Database Schema:
+                User info table
+                User TV Show mapping table
+                TV Show table
+        *Since majority of the data is static we can be made this available on ISP's
+        or we can cache popular videos between data layer and application layers.
+
+        4. bottleneck:
+            Q:How to deal with huge spike in request ?
+            A:Scaling the system - Scale up or scale out with better load balancer techniques
+
+            Q: How to store data ?
+            A: Read heavy : duplicate data using shards
 
 
 
