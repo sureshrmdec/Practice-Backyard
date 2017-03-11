@@ -196,5 +196,119 @@ A: public abstract class Shape {
       }
    }
 
+Q: Create a vending machine ?
+A: 1. Define Requirement Statement //Don't Assume, Ask interviewer about what core functionality is needed
+      System which accept coin of 1,5,10,15,25 cent
+      Allow user to select product Coke(25) pepsi(35) Soda(45)
+      Allow user to cancel request and take refund
+      Return selected product and change if any
+      Allow reset operation for vending machine supplier
+
+    2. Define the core objects
+      Public API for vending machine - high level functionality will go into this
+      VeningMachineImp sample implementation of vending machine
+      VendingMachineFactory A factory class to create different kind of vending machine
+      Item - enum to represent item served
+      Inventory - java class to represent Inventory
+      Coin - another enum to define what supported coin are
+      NotFullPaidException
+      NotSufficentChangeException
+      SoldOutException
+
+    3. Define the relationship between core objects
+
+    4. Write the implemnation
+
+    public interface VendingMachine {
+        public long selectItemGetPrice(Item item);
+        public void insertCoin(Coin coin);
+        public List<Coin> refund();
+        public Bucket<Item, List<Coin>> collectItemAndChange();
+        public void reset();
+    }
+
+    public class VendingMachineImpl implements VendingMachine {
+        private Inventory<Coin> cashInventory  = new Inventory<Coin>();
+        private Inventory<Item> itemInventory = new Inventory<Item>();
+        private long totalSales;
+        private item currentItem;
+        private long currentBalance;
+
+        public VendingMachineImpl() {
+            intialize();
+        }
+        public void intialize() {
+            //Intialize with 5 coin of each denomination and 5 can of each item
+            For(Coin c : Coin.values()) {
+                cashInventory.put(c, 5);
+            }
+
+            for(Item i : item.values()) {
+                itemInventory.put(i, 5);
+            }
+        }
+
+        @Override
+        public Long selectItemGetPrice(Item item) {
+            if(itemInventory.hasItem(item)) {
+                currentItem = item;
+                return currentItem.getPrice();
+            }
+            throw new SoldOutException("sold out, Please buy another item");
+        }
+
+        @Override
+        public void insertCoin(Coin coin) {
+            currentBalance = currentBalance + coin.getDenomination();
+            cashInventory.add(currentBalance);
+        }
+
+        @Override
+        public Bucket<Item, List<Coin>> collectItemAndChange() {
+            Item item = CollectItem();
+            totalSales = totalSales + item.getPrice();
+            List<Coin> change = collectChange();
+            return new Bucket<Item, List<Coin>>(item, change);
+        }
+
+        private Item collectItem() throws NotSufficentChangeException {
+        if(isFullPaid) {
+            if(hasSufficientChange()){
+                itemInventory.deduct(currentItem);
+                return currentItem;
+            }
+            thow new NotSufficentChangeException("Not sufficient change in itemInventory");
+        }
+        long remainingBalance = currentItem.getPrice() - currentBalance;
+        }
+
+        private List<Coin> collectChange() {
+            long changeAmount = currentBalance - currentItem.getPrice();
+            List<Coin> change = getChange(changeAmount);
+            updateCashInventory(change);
+            currentBalance = 0;
+            currentItem = null;
+            return change;
+        }
+    }
+Q: Design a student registration and deregistration system a particualr course
+        1. A catalog of courses from hich user can select a course to register
+        2. Deregsister from the course
+        3. update student that course is full
+
+    2. Define the core objects ?
+        Registration, student courses
+
+    3. Define the relationship between different objects
+       A course can have many students,student can only register only once in individual coursetr
+
+    Code:
+
+    public interface Registration {
+        public void register(Student student, Course course);
+        public void deregister(Student student, Course course);
+        public void avalibility(Course course);
+    }
+
 *******Pending*********
 1. Abstraction, Encapsulation, Polymorphism, inheritance
