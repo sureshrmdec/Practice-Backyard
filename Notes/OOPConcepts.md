@@ -310,5 +310,39 @@ Q: Design a student registration and deregistration system a particualr course
         public void avalibility(Course course);
     }
 
+Q: What is the difference between abstract class and interface ?
+A: 1.Is there a functionality which could be coded at one place and can be utilized
+     by all implementing classes in same way then it's good to use abstract class
+   2. DisAdvantage of abastract class is, java only allow single inheritance
+   while with interface you can add multiple behaviour to application.
+
+Q: Smart phone class and will have desired classes like IPhone, AndroidPhone, WindowPhone
+   can be phone with brand, how would you design this system of classes ?
+A: Create factory static method which takes some argument which identify what type
+   of ojbect you want to create at run time instead of hard coding that at compile time
+
+   1- Smartphone parent class which have model, release year and brand with abstract methods
+   such as camera, calling
+   2. Then brand will go and have child implementation and have common properties which
+   is available in all the models then model class extend brand for further functionality
+
+
+Q:When do you overload a method in Java and when do you override it?
+A: Overloading define providing similar functionality with different input set while
+   overriding provide different functionality on the same input set.
+
+**Chain of Responsibilty Pattern in JDK:
+** Used to achieve loose coupling in software design where a request from client is passed
+   to chain of objects to process them.Then object in chain will decide themselves who will
+   be processing the request and whether request is required to sent to next object.
+   Client don't know which part of the chain will be processing the request.Each object
+   in the chain will have it's own implementation to process the request either full or partial
+   and send to user back again -Ex: java.util.Logging.Logger #Log()
+
+Q:Design an ATM Machine ?
+A:
+
+Q: Decorator Design Pattern in java ?
+A:
 *******Pending*********
 1. Abstraction, Encapsulation, Polymorphism, inheritance
