@@ -372,6 +372,12 @@ public class Trees {
         }
        return sum;
     }
+    /**
+    *Problem : WAP to do inorder traversal iteratively for an tree
+    *Link :
+    *Approach : Use stack to go as deep as possible and then explore right
+    *candidates if no more left can be traversed
+    */
 
     public List<Integer> inorderIterative (TreeNode root) {
         List<Integer> result = new ArrayList<>();
@@ -389,6 +395,33 @@ public class Trees {
         }
         return result;
     }
+
+
+    /**
+    *Problem : Find the kth smallest element in BST
+    *Link: https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+    *Approach :
+        1. Do Binary Search and reduce the search space ,if number of elements in left
+        subtree is less than k than search for right subtree ,if not search in left search space
+        2.Do recursive inroder traversal with helper utility , if left != null go left
+        and decrement the counter and if at one point we find k = 0 then return result
+        but if we reach null then do this for right side tree
+    */
+    public int kthSmallestBST(TreeNode root, int k) {
+        int count = countNodes(root.left);
+        if(K <= count){
+            return kthSmallestBST(root.left, k);
+        } else if (k > count + 1){
+            return kthSmallestBST(root.right, k - 1 - count);
+        }
+        return root.val;
+    }
+
+    public int countNodes(TreeNode root) {
+        if(root == null) return 0;
+        return 1 + countNodes(root.left) + countNodes(root.right);
+    }
+
     public static void main(String[] args) {
         Trees tree = new Trees();
         tree.root = new TreeNode(5);
