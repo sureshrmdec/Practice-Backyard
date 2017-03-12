@@ -373,6 +373,22 @@ public class Trees {
        return sum;
     }
 
+    public List<Integer> inorderIterative (TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack();
+        TreeNode currentNode = root;
+
+        while(currentNode != null || !stack.isEmpty()) {
+            while(currentNode != null) {
+                stack.push(currentNode);
+                currentNode = currentNode.left;
+            }
+            int value = stack.pop().val;
+            result.add(value);
+            currentNode = currentNode.right;
+        }
+        return result;
+    }
     public static void main(String[] args) {
         Trees tree = new Trees();
         tree.root = new TreeNode(5);
