@@ -297,7 +297,7 @@ public class DPSolution {
         }
         return maxSum;
     }
-    
+
     public static void main(String[] args) {
         DPSolution objDP = new DPSolution();
         int arr[] = new int[]{2,3,1,1,4};
