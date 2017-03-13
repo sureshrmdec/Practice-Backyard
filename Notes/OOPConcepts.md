@@ -1,10 +1,10 @@
 Q1: Difference between composition and inheritance
 A1:
-   1. Compostion provides more of HAS-A unctionality while inheritance provides IS-A functionality
+   1. Compostion provides more of HAS-A functionality while inheritance provides IS-A functionality
    2. Compostion don't inherit ,it keep that class reference as member variable
    3. inheritance provides Polymorphism where you can give sub class object when a super
       class object is needed
-   4. One reason for this is java don'tssupport multiple inheritance and composition provides
+   4. One reason for this is java don't support multiple inheritance and composition provides
       a better way to implement more than one class.
    5. Unit testing is best with composition as you can mock those reference objects while
       you need super class object in inheritance testing.

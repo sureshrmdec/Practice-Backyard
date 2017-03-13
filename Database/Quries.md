@@ -18,3 +18,9 @@ A: Select DeptId, MAX(Salary) from Employee GROUP BY DeptID;
 
 Q: Select employee who are also manager ?
 A: Select e.name , m.name from Employee e, Employee m where e.mgr_id = m.mgr_id;
+
+Q: SQL query to print all tables in database ?
+A: select table_name from information_schema_tables where table_type = 'base table' and
+   table_schema = 'test'
+   //use database -> to work with given database
+   //show tables - > to show all tables in given database
