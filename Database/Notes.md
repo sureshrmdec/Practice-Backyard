@@ -15,4 +15,40 @@ Q: Difference between primary key and foriegn key in database ?
 A:
 
 Q: Define referential integrity in database ?
-A:
+A: For every foriegn key values there should be a primary key associated otherwise it
+   will violate referential integrity
+
+SQL Basics :
+    Data Definition Language : Create table, create index, create view, alter table,drop table,
+    create schema, default, not null, check, primary key, foreign key
+    Data Manupulation language : select, insert,where, group by ,having update,delete, rollback, commit
+    comparison Operator : = < > >= <=
+    Logical Operator : AND OR not
+    Special Opertor : between, IN, EXITS, LIKE ,DISTINCT, IS null
+    Aggregate function : Count, MAX, MIN, SUM,AVG
+
+    Create table tablename {
+    colName data type constraint
+    }
+
+    composite primary key : primary key (recipe_id, ingredient_id);
+    On update cascade : mean if you update main table key which other table uses
+    as it's foreign key then it will also be updated.
+
+    SQL Constraint : Not null, Unique, default, check
+
+    Index : Create index <indexName> on <tableName>(<colName1>, <colName2>);
+    Insert : Insert into <tableName> values ();
+    Select : Select *(all columns) from <tableName>;
+    Update : update <tableName> set <colName> = 'value';
+
+    Alter: Alter table <tableName> add  <columnName> /to modify and also to add Constraint
+    Alter table <tableName> modify(<ColName(datatype)>);
+    Alter table <tableName> drop <columnName>;
+    alter table add constriant <ConstraintName<columnName(datatype)>>
+
+
+    Create table <tableName> as Select * from emp;
+
+    Groupby : to group and then use with aggregation function to find min and MAX
+    in that group with having and order by summarization
