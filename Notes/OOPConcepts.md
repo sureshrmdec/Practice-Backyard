@@ -17,7 +17,7 @@ A2:
    1. Intrface is the key to achieve Polymorphism.
    ** Polymorphism is powerful,it provides flexibilty and dynamicism
 
- **Always strive for highly cohesive and loosly couple Solutiont
+ **Always strive for highly cohesive and loosly couple Solution.
  **Programming for interface than the implementation
 
  Q: List out some object oriented design principle ?
@@ -37,6 +37,24 @@ A2:
 
     5.Dependency Injection or Inversion principle
     6. Favour composition over inheritance
+
+Q: Tell me about SOLID principle ?
+    1. Single Responsibilty Principle : A class should do only thing and can only be changed by one reason.
+    Ex: AreaCalculator class is printing the data also along with providing sum method. But area output() method
+    should be separate class with different output format such as HTML, JSON.
+
+    2.Open Closed principle : Object and entities should be open for extension and closed for modification
+    Ex: Coding for interface then implementation, that require you to extend class and code further functionality
+    than chaning the base class.
+
+    3.LisKov Substitution principle: All the subclass/derived class should be substituable for base/parent class
+
+    4. Interface segregration principle: A client should not be forced to implement a method which he don't require
+    Ex: Area() and volume() method are not needed for all shapes so divide the methods in two interface will help
+    solve the problem.
+
+    5. Dependency Inversion principle: Entities must depend on abstraction not concretions.
+    High Level module should not depend on low level module but they should depend on abstractions.
 
 
 (Link :http://javarevisited.blogspot.com/2011/12/factory-design-pattern-java-example.html)
@@ -108,12 +126,19 @@ Q: Design Conway game of life ?
                   }
                }
 
-               public int countNeighours(int row, int col) {
-                  //Check cell on top right, top left and top
-                  //Check cell on bottom left, bottom right, bottom top
-                  //Check cell left and right
-               }
-         }
+               public int countNeighours(int row, int col, cellObject) {
+                   private static final int[][] NEIGHBOURS = {
+                        {-1, -1}, {-1, 0}, {-1, +1},
+                        { 0, -1},          { 0, +1},
+                        {+1, -1}, {+1, 0}, {+1, +1}};
+                        int cnt = 0;
+                        for (int[] offset : NEIGHBOURS) {
+                            if (cellObject.getLiveStatus(row + offset[0], col + offset1)) {
+                                          cnt++;
+                          }
+                        }
+                    return cnt;
+                }
 
       Updating the grid in discrete time step :
 
@@ -341,6 +366,26 @@ A: Overloading define providing similar functionality with different input set w
 
 Q:Design an ATM Machine ?
 A:
+
+
+Q: Design a chase game ?
+A:
+    Use Case/Requirement:
+    1. Two players playing the game
+    2. Each will have it's own pieces black or white
+    3. Each piece will have face value and suit it belong to
+    4. all this happens on cell which have co-ordinate on board
+    5. Board consist of cell, pieces at different location on cells
+    6. A chessgame class binding all this things together.
+
+    Core Objects :
+    1. chessgame object
+    2. Player object
+    3. piece object
+    4. board object
+
+    Relationshipt between objects:
+
 
 Q: Decorator Design Pattern in java ?
 A:

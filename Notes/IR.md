@@ -72,3 +72,11 @@ Information Retrival :
     space then it will define inner produce
     similarity(dj, q) : summation (wij. wiq) : weight of term i in document j
     wiq: weight of term i in query q
+
+
+Tokenization , Mapping words to root word, furthermore using stemming algorithm to Remove
+stop words and very common words such as the,and
+Algorithm : Soundex algorithm and Poter stemming algorithm
+
+Term doucment Frequency :
+<Keyword> , Number of document in which occuring => List containing each document and count
