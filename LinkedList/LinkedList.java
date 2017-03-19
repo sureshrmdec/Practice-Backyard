@@ -614,7 +614,25 @@ public class LinkedList {
         if(index == k) return head.val;
         return -1;
     }
-    
+
+    /**
+    *Problem : delete a linked List node given access to only that node
+    *Link: CTCI 2.3
+    *Constraint :
+        1. LinkedList should not be null
+        2. what if given node is not part of Linked List
+    Idea:
+        1. Just use trick that transfer next node data to given node and point
+        given node to next.next node
+        Time Complexity : O(1) ; Space Complexity :O(1)
+    Test Case : Null, Given node 2 delete that given node is in list
+    */
+    public boolean removeGivenNode(ListNode n) {
+        if(n == null || n.next == null) return false;
+        n.val = n.next.val;
+        n.next = n.next.next;
+        return true;
+    }
     public static void main(String[] args) {
 
         LinkedList llist = new LinkedList();
