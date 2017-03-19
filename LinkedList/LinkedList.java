@@ -544,6 +544,37 @@ public class LinkedList {
       return head = head.val == head.next.val ? head.next : head;
    }
 
+    /**
+    *Problem : Remove duplicats from unsorted LinkedList
+    *Link : CTCI 2.1
+    *Constraint :
+        1. Can list be empty
+        2. Would it be possible that list don't contain a duplicate
+        3. What would be the list size
+    *Idea:
+        1. Sort the list - mergeSort(nlogn) + find duplicate and remove them
+        2. You can use hashSet to keep elements and when you find a element which
+        was already there in hashSet then using previousPointer technique remove that
+        element : O(n) + O(n) time and space complexity
+    *Test Case: NULL, [1] , [1,2,1], [1,2,3,4]
+    */
+    public ListNode removeDuplicates(ListNode head) {
+        if(head == null || head.next == null) return head;
+        HashSet<Integer> nodeValues = new HashSet<>();
+        ListNode currentNode = head, previousNode = null;
+
+        while(currentNode != null) {
+            if(nodeValues.contains(currentNode.val)) {
+                previousNode.next = currentNode.next;
+            } else {
+                nodeValues.add(currentNode.val);
+                previousNode = currentNode;
+            }
+            currentNode = currentNode.next;
+        }
+        return head;
+    }
+
     public static void main(String[] args) {
 
         LinkedList llist = new LinkedList();
