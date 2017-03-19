@@ -1204,6 +1204,44 @@ public class ArraySolution {
       return true;
    }
 
+   /**
+   *Problem: URLify: Put %20 in place of space
+   *Constraint:
+      1.Does string have enough space at end to accomdate the added characters
+      2.Can we have extra space; a extra array as result array
+   *Idea:
+      1. Count all the spaces and compute the new total length and then use two pointer
+      approach; one for new last index and second for original string last index
+      If you find space in true string then insert %20 in new updated string
+      TimeComplexity : O(tureLength + spaceCount*2) : spaceComplexity : O(1)
+   Test Case:
+   NULL, "Mr John Smith   " :13
+   */
+   public String urlify(String input, int len) {
+      if(input == null || inpug.length == 0) return input;
+      char[] charArray = input.toCharArray();
+
+      //spaceCount
+      int spaceCount = 0;
+      for(int i = 0; i < charArray.length; i++) {
+         if(charArray[i] == ' ') spaceCount++;
+      }
+      int finalLength = len + spaceCount * 2;
+      if(input.length() < finalLength) System.out.println("Not enough space at end to urlify");
+
+      for(int i = len; i > 0; i--) {
+         if(input[len] == ' ') {
+            input[finalLength - 1] = '0';
+            input[finalLength - 2] = '2';
+            input[finalLength - 3] = '%';
+            finalLength = finalLength - 3;
+         } else {
+            input[finalLength - 1] = input[len];
+            finalLength--;
+         }
+      }
+   }
+   
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
