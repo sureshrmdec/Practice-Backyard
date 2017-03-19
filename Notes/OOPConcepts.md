@@ -109,14 +109,14 @@ Q: Design Conway game of life ?
 
                public Grid() {
                   Size = new Point(Game1.Cellx, Game2,CellsY);
-                  cells = new Cells[Size.X][Size.Y];
+                  grid = new Cells[Size.X][Size.Y];
                }
 
                public void update() {
                   if(int i = 0; i < size.X; i++) {
                      for(int j = 0; j < size.Y; j++) {
                         boolean isLive = (grid[i][j].isAlive);
-                        int count = countNeighours(i, j);
+                        int count = countNeighours(i, j, grid[i][j]);
                         if(isLive && count < 2) result = false;
                         if(isLive && (count ==2 || count ==3)) result true;
                         if(isLive && count >3) result false;
