@@ -575,6 +575,46 @@ public class LinkedList {
         return head;
     }
 
+    /**
+    *Problem : Return Kth element to the last in Linked List
+    *Link : CTCI 2.2
+    *Constraint:
+        1. Can list be empty
+        2. Can list have length less than k
+    Idea:
+        1. Move one pointer by K ahead and then run two pointer so when one will
+        reach at last node other will be at Kth node.
+        Time Complexity :O(n) : spaceComplexity : O(1)
+    TestCase : Null, [1];k =3, [1,2,3,4,5,6] ;k =2
+    */
+    public ListNode KthNodefromLast(ListNode head, int k) {
+        if(head == null || head.next == null)return head;
+        ListNode runner = head;
+        int counter = 0;
+        while(counter < k) {
+            runner = runner.next;
+            counter++;
+        }
+        ListNode walker = currentNode;
+        while(runner != null) {
+            walker = walker.next;
+            runner = runner.next;
+        }
+        return walker;
+    }
+
+    /**
+    Problem : Return the Kth element to the last in LinkedList - Recurrsive Approach
+    *Link: CTCI 2.2
+    */
+    public int KthNodefromLastRecurrsive(ListNode head, int k) {
+        if(head == null) return 0;
+
+        int index = KthNodefromLastRecurrsive(head.next, k) + 1;
+        if(index == k) return head.val;
+        return -1;
+    }
+    
     public static void main(String[] args) {
 
         LinkedList llist = new LinkedList();
