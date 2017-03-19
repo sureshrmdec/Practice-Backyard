@@ -1137,6 +1137,45 @@ public class ArraySolution {
         return sb[0].toString();
     }
 
+    /**
+    *Problem : Implement a Algorithm to determine if string has all unique characters
+    *Link : CTCI 1.1
+    Constraint:
+        1. Can string be null
+        2. What can be maximum length of string
+        3. What are individual type of string element is
+    Idea:
+        1. Create a hashSet and if you get a new entry which is already in set return false
+        Time Complexity : O(n) : spaceComplexity : O(1)
+        2. Sort the string as charArray and see if any of two consecutive element of same type
+        TimeComplexity : O(nlogn) : spaceComplexity :O(1)
+    TestCase:
+    null, abc, abba
+    */
+   public boolan isUniqueString(String input) {
+        if(input == null || input.length() < 2) return true;
+        HashSet<Character> uniqueChars = new HashSet<>(); // You can use boolean array of 128
+                                                          // chars to make space complexity O(1)
+        for(int i = 0; i < input.length() - 1; i++) {
+            if(uniqueChars.contains(input.charAt(i))) return false;
+            uniqueChars.add(input.charAt(i));
+        }
+        return true;
+   }
+
+   public boolean isUniqueString(String input) {
+      if(input == null || input.length < 2) return true;
+      char[] charArray = input.toCharArray();
+      Arrays.sort(charArray);
+
+      for(int i = 1; i < charArray.length; i++) {
+         if(charArray[i] == charArray[i - 1]) return false
+      }
+      return true;
+   }
+
+   /**
+   */
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
