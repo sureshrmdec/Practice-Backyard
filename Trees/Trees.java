@@ -422,6 +422,44 @@ public class Trees {
         return 1 + countNodes(root.left) + countNodes(root.right);
     }
 
+    /**
+    *Problem : Most Frequent SubStree Sum
+    *Link: https://leetcode.com/problems/most-frequent-subtree-sum/
+    *Constraint:
+        1.Can tree be empty
+        2. What if all the subtree sum is unique,return all of them
+    *Idea:
+        1.Go recurresively and store at each tree node what sum we have and also
+        maintain what the maxSum we got and update any changes to maxCount; this will
+        help us reterive items from Map - get item with values as maxCount
+        TimeComplexity :O(n) : worst case you will traverse all the tree node ; O(n) - map
+    Test:
+        5
+        / \    => [2]
+        2  -5
+    */
+    public List<Integer> frequentSumTree(TreeNode root) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int maxCount = 0;
+        postOrder(root, map, maxCount);
+        List<Integer> result = new ArrayList<Integer>();
+        for(Integer e : map.keySet()){
+            if(map.get(e) == maxCount) result.add(e);
+        }
+        return result;
+    }
+
+    public int postOrder(TreeNode root, HashMap<Integer, Integer> map, int maxCount) {
+        if(root == null) return 0;
+
+        int left = postOrder(root.left, map, maxCount);
+        int right = postOrder(root.right, map, maxCount);
+        int sum = left + right + root.val;
+        int mapValue = map.getOrDefault(sum, 0) + 1;
+        maxCount = Math.max(mapValue, maxCount);
+        return sum;
+    }
+
     public static void main(String[] args) {
         Trees tree = new Trees();
         tree.root = new TreeNode(5);
