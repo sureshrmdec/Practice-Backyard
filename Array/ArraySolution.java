@@ -1175,7 +1175,35 @@ public class ArraySolution {
    }
 
    /**
+   *Problem : check if one string is permutation of other
+   *Link: CTCI 1.2
+   *Constraint:
+      1. Is permutation is case Sensitive
+      2. Is whitespace is significant
+   *Idea:
+      1. Sort both the strings and they should be equal
+      Time Complexity : O(nlogn) : spaceComplexity :O(1)
+      2.Create a Map that contain frequency contain and update the enteries on
+      first iteration and delete the enteries on second iteration
+      Time Complexity : O(n) : spaceComplexity : O(n)
    */
+   public boolean stringPermutation(String input1, String input2) {
+      if(input1 == null && input2 == null) return true;
+      if(input1 == null || input2 == null) return false;
+
+      if(input1.length() != input2.length())  return false;
+      char[] charArray1 = input.toCharArray();
+      char[] charArray2 = input.toCharArray();
+      Arrays.sort(charArray1);
+      Arrays.sort(charArray2);
+
+      //you can also use equals method of arrays as charArray1.equals(charArray2);
+      for(int i = 0; i < charArray1.length; i++) {
+         if(charArray1[i] != charArray2[i]) return false;
+      }
+      return true;
+   }
+
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
