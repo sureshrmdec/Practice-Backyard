@@ -57,4 +57,38 @@ public class MatrixSol {
                           {7,8,9}};
         objMatrix.printMatrixDiagonally(input);
     }
+
+    /**
+    *Problem : Rotate Image
+    *Link: https://leetcode.com/problems/rotate-image/
+    *Constraint:
+        1.Can matrix be empty
+        2.Rotate 90 degreess - clockwise
+        3.Is matrix a square matrix
+    *Idea:
+        1.Take the transpose of matrix- Matrix[i][j] = Matrix[j][i] - row will become column
+        2.Then swap the nodes arounnd the center column
+        Time Complexity :O(n^2) : space Complexity :O(1)
+    */
+    public void RotateImage(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        for(int i = 0; i < m; i++) {
+            for(int j = i; j < n; j++) {
+                int temp = 0;
+                temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n/2; j++) {
+                int temp = 0;
+                temp = matrix[i][j];
+                matrix[i][j] = matrix[i][matrix.length - 1 -j];
+                matrix[i][matrix.length - 1 -j] = temp;
+            }
+        }
+    }
 }
