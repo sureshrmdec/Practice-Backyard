@@ -1271,7 +1271,35 @@ public class ArraySolution {
 
         return count;
     }
-    
+
+   /**
+   *Problem: Count prime number less than  a given number
+   *Link: https://leetcode.com/problems/count-primes
+   *Constraint:
+      1. Number should be positive
+   *Idea:
+      1.let's create a boolean array for given number set and for each number , run a
+      new loop and turn it's multiple to false as prime -Ex: for number 2 in inner loop
+      turn 4,6,8 as false prime and do this for Sqrt(n) times outer loop
+   */
+   public int primeNumberLessThanN(int n) {
+      boolean[] result = new boolean[n];
+      for(int i = 0; i < n; i++) {
+         result[i] = true;
+      }
+      for(int i = 2; i < i*i <= n; i++) {
+         if(result[i] == true) {
+            for(int j = i*2; j<=n; j+=i) {
+               result[j] = false;
+            }
+         }
+         int result = 0;
+         for(int i = 2; i<=n; i++) {
+            if(result[i] == true) result++;
+         }
+         return result;
+      }
+   }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
