@@ -612,7 +612,7 @@ public class LinkedList {
 
         int index = KthNodefromLastRecurrsive(head.next, k) + 1;
         if(index == k) return head.val;
-        return -1;
+        return -1;-
     }
 
     /**
