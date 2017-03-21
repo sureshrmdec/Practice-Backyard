@@ -460,6 +460,58 @@ public class Trees {
         return sum;
     }
 
+    /**
+    *Problem : Print the right side view of Tree
+    *Link: https://leetcode.com/problems/binary-tree-right-side-view/
+    *Constraint:
+        1. Can tree be empty
+    *Idea:
+        1. Do level order traversal from right side and print the first node value in that
+        process, if right node exit it will be printed or if right node is not there left node
+        will be printed.
+        TimeComplexity :O(n) : queue will process all tree node : space complexity :O(n)
+    */
+    public List<Integer> rightSideViewTree(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        if(root == null) return result;
+        queue.offer(root);
+        while(!queue.isEmpty()) {
+            for(int i = 0; i < queue.size(); i++) {
+                TreeNode temp = queue.poll();
+                if(i == 0) result.add(temp.val);
+                if(temp.right != null) queue.add(temp.right);
+                if(temp.left != null) queue.add(temp.left);
+            }
+        }
+        return result;
+    }
+
+    /**
+    *Problem : Print the right side view of Tree - recurresively
+    *Link: https://leetcode.com/problems/binary-tree-right-side-view/
+    *Constraint:
+        1. Tree can be empty
+    *Idea:
+        1.Backtracking : write a recurrsive function that first traverse the right hand
+        side, and at any stage if current depth equals to result list size then add that
+        to result set.
+        Time Complexity :O(n) : spaceComplexity : O(n)
+    */
+    public List<Integer> rightSideViewReccursive(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if(root == null) return result;
+        rightSideUtility(root, result, 0);
+        return result;
+    }
+
+    public void rightSideUtility(TreeNode root, List<Integer> result, int depth) {
+        if(root == null) return;
+        if(depth == result.size()) result.add(root.val);
+        rightSideUtility(root.right, result, depth + 1);
+        rightSideUtility(root.left, result, depth + 1);
+    }
+    
     public static void main(String[] args) {
         Trees tree = new Trees();
         tree.root = new TreeNode(5);
