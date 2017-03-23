@@ -511,7 +511,12 @@ public class Trees {
         rightSideUtility(root.right, result, depth + 1);
         rightSideUtility(root.left, result, depth + 1);
     }
-    
+
+    /**
+    *Problem: populating next right pointer in each node
+    *Link: https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
+    *
+    */
     public static void main(String[] args) {
         Trees tree = new Trees();
         tree.root = new TreeNode(5);
