@@ -513,10 +513,56 @@ public class Trees {
     }
 
     /**
-    *Problem: populating next right pointer in each node
-    *Link: https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
-    *
+    *Problem: Find bottom left tree Value
+    *Link: https://leetcode.com/problems/find-bottom-left-tree-value/
+    *Constraint:
+        1. Can tree be null - return 0
+    *Idea:
+        1.Do a level order traversal right to left and then last element to get out
+        from the queue will be the leftMost elemenet at maximum depth
+        *Time Complexity : O(n) since all tree nodes will be traversed and o(n) queue space
     */
+    public int BottomLeftValue(TreeNode root) {
+        if(root == null) return 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offfer(root);
+
+        while(!queue.isEmpty()) {
+            root = queue.poll();
+            if(root.right != null) queue.offer(root.right);
+            if(root.left != null) queue.offer(root.left);
+        }
+        return root.val;
+    }
+
+    /**
+    *Problem: Find bottom left tree Value
+    *Link: https://leetcode.com/problems/find-bottom-left-tree-value/
+    *Constraint:
+        1. Can tree be null - return 0
+    *Idea:
+        1.Do a level order traversal right to left and then last element to get out
+        from the queue will be the leftMost elemenet at maximum depth
+        *Time Complexity : O(n) since all tree nodes will be traversed and o(n) queue space
+    */
+    public int BottomLeftValue(TreeNode root) {
+        if(root == null) return 0;
+        int result = 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            for(int i = 0; i < size; i++) {
+                TreeNode temp = queue.poll();
+                if(i == 0) result = temp.val;
+                if(temp.left != null) queue.offer(temp.left);
+                if(temp.right != null) queue.offer(temp.right);
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         Trees tree = new Trees();
         tree.root = new TreeNode(5);
