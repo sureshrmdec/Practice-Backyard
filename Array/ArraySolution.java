@@ -1300,6 +1300,51 @@ public class ArraySolution {
          return result;
       }
    }
+
+   /**
+   *Problem :Sort colors in arrays represented through 0,1,2
+   *Link: https://leetcode.com/problems/sort-colors/
+   *Constraint:
+        1. Can array be empty
+        2. How big the array size is ?
+    *Idea:
+        1.Put all the twwo's at the end of array and put all zeros at start of array and
+        update the pointers accordingly on both side.
+        Time Complexity : O(n) ; spaceComplexity : O(1)
+   */
+   public void sortColors(int[] input) {
+       int size = input.length;
+       if(size == 0) return input;
+       int second = n-1,zero = 0;
+       for(int i = 0; i <= second; i++) {
+           while(A[i] == 2 && i < second) swap(A[i], A[second--]);
+           while(A[i] == 0 && i > zero) swap(A[i], A[zero++]);
+       }
+   }
+   /**
+   *Problem :Sort colors in arrays represented through 0,1,2
+   *Link: https://leetcode.com/problems/sort-colors/
+   *Constraint:
+        1. Can array be empty
+        2. How big the array size is ?
+    *Idea:
+        1.Count all zeros, ones and two's and keep filling from left to right
+        Time Complexity : O(n) ; spaceComplexity : O(1)
+   */
+   public void sortColors(int[] input) {
+        int size = input.length;
+        if(size == 0) return;
+        int countZeros = 0, countOnes = 0, countTwos = 0;
+        for(int i = 0; i < input.length; i++) {
+            if(input[i] == 0) countZeros++;
+            else if(input[i] == 1) countOnes++;
+            else countTwos++;
+        }
+        for(int i = 0; i < countZeros; i++) input[i] = 0;
+        for(int i = 0; i < countOnes; i++) input[i + countZeros] = 1;
+        for(int i = 0; i < countTwos; i++) input[i + countZeros + countOnes] = 2;
+    }
+    
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
