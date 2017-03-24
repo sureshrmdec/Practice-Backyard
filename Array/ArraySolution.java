@@ -1344,7 +1344,32 @@ public class ArraySolution {
         for(int i = 0; i < countOnes; i++) input[i + countZeros] = 1;
         for(int i = 0; i < countTwos; i++) input[i + countZeros + countOnes] = 2;
     }
-    
+
+   /**
+   *Problem : Protduct of Array except itself
+   *Constriant:
+      1. Can array be empty
+      2. What will be the size of array
+   *Idea:
+      1.Run two for loop ,first multiply all the left sides entries for given number
+      2.For second loop, multiply all the right hand entries
+      Time Complexity: O(n) ; spaceComplexity :O(n)
+   */
+   public int[] productExceptSelf(int[] input) {
+      if(input.length == 0) return input;
+      int[] result = new int[input.length];
+
+      for(int i = 0, temp = 1; i < nums.length; i++) {
+         result[i] = temp;
+         temp *= input[i];
+      }
+
+      for(int i = nums.length - 1, temp = 1; i >=0; i--) {
+         result[i] *= temp;
+         temp *= input[i];
+      }
+      return result;
+   }
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
