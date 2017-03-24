@@ -146,4 +146,52 @@ public class MatrixSol {
         }
         return result;
     }
+
+    /**
+    *Problem : Set Matrix Zero
+    *Link: https://leetcode.com/problems/set-matrix-zeroes/
+    *Constraint:
+        1.Can matrix be empty - No
+        2.Can be a case where matrix don't have zero element
+        3. Size of matrix - is it square
+    *Idea:
+        1.Use first Row and first column as marker to capture a given elemnt is zero and
+        that row and col needs to set with all element zero
+        2.if first row have zero elements then capture them too using flag elements
+        *Time Complexity : O(n^2) : space complexity: O(1)
+    */
+    public void setZeros(int[][] matrix) {
+        boolean firstRow = false, firstCol = false;
+
+        for(int i = 0; i < matrix.length; i++) {
+            for(int j = 0; j < matrix[0].length; j++) {
+                if(matrix[i][j] == 0) {
+                    if(i == 0) firstRow = true;
+                    if(j == 0) firstCol = true;
+                    matrix[0][j] = 0;
+                    matrix[i][0] = 0;
+                }
+            }
+        }
+
+        for(int i = 1; i < matrix.length; i++) {
+            for(int j = 1; j < matrix.length; j++) {
+                if(matrix[i][0] == 0 || matrix[0][j] == 0) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        if(firstRow) {
+            for(int i = 0; i < matrix[0].length; i++) {
+                matrix[0][i] = 0;
+            }
+        }
+
+        if(firstCol) {
+            for(int i = 0; i < matrix.length; i++) {
+                matrix[i][0] = 0;
+            }
+        }
+    }
 }
