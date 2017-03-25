@@ -1370,6 +1370,34 @@ public class ArraySolution {
       }
       return result;
    }
+
+   /**
+   *Problem: Given a set of distinct integers, return all possible subset
+   *Link: https://leetcode.com/problems/subsets/
+   *Constraint:
+      1. Can it contain duplicate and if it contain duplicate , will there be a
+      change in your apporach
+      2. What will the size of array, will subset count be fit in memory
+   *Idea:
+      1.Use Backtracking to generate all possible outputs, the apporach is to create
+      a main function and also utilize a helper utility to generate all possible permutation
+      *Time Complexity : O(n!) - Not sure
+   */
+   public List<List<Integer>> subsets(int[] input) {
+      List<List<Integer>> result = new ArrayList<>();
+      Arrays.sort(input);
+      backtrack(result, new ArrayList<>(), input, 0);
+      return result;
+   }
+
+   public backtrack(List<List<Integer>> result, List<Integer> temp, int[] input, int startIndex) {
+      list.add(new ArrayList<>(temp));
+      for(int i = startIndex; i < input.length; i++) {
+         backtrack(result, temp, input, i + 1);
+         temp.remove(temp.size() - 1);
+      }
+   }
+
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
