@@ -1398,6 +1398,35 @@ public class ArraySolution {
       }
    }
 
+   /**
+   *Problem : Given a set of integers can contain duplicate, return all possible subset
+   *Link: https://leetcode.com/problems/subsets-ii/
+   *Constraint:
+      1.Can it contain duplicate - YEs and only difference in apporach compared to previous question
+      is inside utility for loop, just check that index is valid and if i & i-1 are same then continue;
+      2. What will be the size of array, will subset list fit in memory
+   *Idea:
+      1.Use backtracking to generate all possible outputs, the apporach is to create a main function
+       and also utilize a helper utility to generate all possible perumutation while avoiding duplciate
+       such as[2, 2] two times or [1,2] and [2,1]
+   */
+   public List<List<Integer>> subsetsWithDup(int [] input) {
+      List<List<Integer>> result = new ArrayList<>();
+      if(input.length == 0) return result;
+      Arrays.sort(input);
+      backtrack(result, new ArrayList<>(), input, 0);
+   }
+
+   public backtrack(List<List<Integer>> result, List<Integer> temp, int[] input, int startIndex) {
+      list.add(new ArrayList<>(temp));
+      for(int i = startIndex; i < input.length; i++) {
+         if(i > startIndex && input[i] == input[i - 1]) continue;
+         temp.addd(input[i]);
+         backtrack(result, temp, input, i + 1);
+         temp.remove(temp.size() - 1);
+      }
+   }
+
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
