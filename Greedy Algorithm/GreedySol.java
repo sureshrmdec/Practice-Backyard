@@ -30,15 +30,42 @@ public class GreedySol {
     }
 }
 
-// class Job implement Comparator<Job> {
-//     private startTime;
-//     private finishTime;
-//
-//     public Job(int st, int ft) {
-//         this.startTime = st;
-//         this.finishTime = ft;
-//     }
-//     public int compare(Job j1, Job j2) {
-//         return j1.finishTime - j2.finishTime;
-//     }
+/**
+*Problem: Minimum number of arrows to burst the ballons
+*Constraint:
+    1. Can the matrix be null or empty,
+    2. What will be the maximum ballon counts
+
+*Idea:
+    1. Use greedy apporach to solve this problem, take first ballon and it's end point
+    as high limit and if new ballon start is less than high limit then we can burst this
+    ballon using previous arrow since it come under that radar.
+    If not then increase the arrow count and set new high to new ballon end point
+*Time Complexity : O(nLogn) + o(n)
+*Space Complexity : O(1)
+Test Case:
+Null - 0; [] - 0; [[10,16],[2,8],[1,6],[7,12]] - 2
+*/
+public int minArrowsBurstBallon(int[][] list) {
+    if(list == null || list.length < 1) return 0;
+    Arrays.sort(list, new Comparator<int[]> {
+        @Override
+        public int compare(int[] o1, int[] o2) {
+            if(o1[0] == o2[0]) return o1[1] -o2[2];
+            return o1[0] -o[2];
+        }
+    });
+    int maxArrows = 1;
+    int arrowLimit = list[0][1];
+    for(int i = 1; i < list.length; i++) {
+        int[] ballon = list[i];
+        if(ballon[0] <= arrowLimit) {
+            arrowLimit = Math.min(arrowLimit, ballon[1]);
+        }
+        else {
+            maxArrows++;
+            arrowLimit = ballon[1];
+        }
+    }
+    return maxArrows;
 }
