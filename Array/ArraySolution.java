@@ -1459,6 +1459,37 @@ public class ArraySolution {
         else
         return LESS_THAN_20[num /100] + " Hundred " + helper(num % 100);
     }
+
+    /**
+    *Problem : Compare version number
+    *Link: https://leetcode.com/problems/compare-version-numbers/
+    *Constraint:
+        1. Can version number be negative
+        2. How long a version number can be
+    *Idea:
+        1. Split the numbers using ".". Then loop through the length of longest
+        version length and compare each number using compareTo method and if any point
+        you see that you have different numbers then return the result
+    *Time Complexity : O(n) : not fully n beacuase you are two characters at one Time
+    *Space Complexity : O(1)
+    */
+    public int compareVersion(String version1, String version2) {
+        String[] levels1 = version1.split("\\.");
+        String[] levels2 = version2.split("\\.");
+
+        int length = Math.max(levels1.length, levels2.length);
+        for(int i = 0; i < length; i++) {
+            Integer v1 = i < levels1.length ? Integer.parseInt(levels1[i]) : 0;
+            Integer v2 = i < levels2.length ? Integer.parseInt(levels2[i]) : 0;
+            int compare = v1.compareTo(v2);
+            if(compare != 0) {
+                return compare;
+            }
+        }
+
+        return 0;
+    }
+    
     public static void main(String[] args) {
         ArraySolution objArraySol = new ArraySolution();
         int input1[][] = {{1,1,1,0},
