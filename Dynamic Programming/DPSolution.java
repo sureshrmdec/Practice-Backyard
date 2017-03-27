@@ -337,7 +337,38 @@ public class DPSolution {
 
        return longest;
    }
-   
+
+   /**
+   *Problem: Decode ways to represent a string
+   *Link: https://leetcode.com/problems/decode-ways/
+   *Constraint:
+        1.Only two digit characters and one digit characters are allowed and two digit
+        characters are limited till 26.
+        2.How big the number be represented by string input
+    *Idea:
+        1.Use Recurrsion to count all possible ways
+        2. Use Dynamic Programming to compute all posssible way a string can be
+        decoded for given length
+        Recurrsion Relation: decodeCount[i] = decodeCount[i -1] + decodeCount[i-2] -Only if
+        the substring(i-2, i) < 26
+    *Time Complexity: O(n) : for Linear search
+    *Space Complexity : O(n) : auxillary space for storing result
+   */
+   public int numDecodings(String s) {
+        int n = s.length();
+        if (n == 0) return 0;
+
+        int[] memo = new int[n+1];
+        memo[n]  = 1;
+        memo[n-1] = s.charAt(n-1) != '0' ? 1 : 0;
+
+        for (int i = n - 2; i >= 0; i--)
+            if (s.charAt(i) == '0') continue;
+            else memo[i] = (Integer.parseInt(s.substring(i,i+2))<=26) ? memo[i+1]+memo[i+2] : memo[i+1];
+
+        return memo[0];
+    }
+
     public static void main(String[] args) {
         DPSolution objDP = new DPSolution();
         int arr[] = new int[]{2,3,1,1,4};
